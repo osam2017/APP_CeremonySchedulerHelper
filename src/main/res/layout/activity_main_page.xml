@@ -6,9 +6,21 @@
     android:layout_height="match_parent"
     tools:context="soldier.rok.trancis.ceremonyschedulehelper.MainPageActivity">
 
-     <RelativeLayout
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar_mainpage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/my_toolbar_mainpage">
 
 
         <include layout="@layout/content_main_page" />
