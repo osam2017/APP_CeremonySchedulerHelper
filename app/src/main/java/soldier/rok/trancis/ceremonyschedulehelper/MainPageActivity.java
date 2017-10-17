@@ -9,15 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class MainPageActivity extends AppCompatActivity {
+import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
+public class MainPageActivity extends AppCompatActivity {
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("R.id.user_unique_id");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
+        toolbar.setTitle(auth.getNick());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -26,10 +27,13 @@ public class MainPageActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
+                Intent intent = new Intent(getBaseContext(), CeremonyAddActivity.class);
                 startActivity(intent);
             }
         });
     }
-}
 
+    @Override
+    public void onBackPressed() {
+    }
+}

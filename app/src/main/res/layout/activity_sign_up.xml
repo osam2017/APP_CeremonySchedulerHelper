@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/launch_background"
-    tools:context="soldier.rok.trancis.ceremonyschedulehelper.LaunchingpageActivity">
+    tools:context="soldier.rok.trancis.ceremonyschedulehelper.SignUpActivity">
 
 
     <TextView
@@ -13,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CEREMONY\n   HELPER"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,11 +31,11 @@
             android:id="@+id/sign_up_user_id"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#000000"
             android:ems="10"
             android:hint="ID"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="15dp" />
 
         <EditText
@@ -45,24 +43,24 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#000000"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/sign_up_user_email"
+            android:id="@+id/sign_up_user_nickname"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="#000000"
             android:ems="10"
-            android:hint="Email"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
+            android:hint="Nickname"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
             android:textSize="15dp" />
 
 
@@ -83,9 +81,10 @@
             android:id="@+id/btn_sign_up"
             android:layout_width="210dp"
             android:layout_height="55dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="100dp"
             android:alpha="0.75"
             android:background="@android:color/black"
+            android:onClick="onSignUp"
             android:text="Sign up"
             android:textColor="#FFFFFF"
             android:textSize="35dp" />
