@@ -1,10 +1,7 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import java.util.ArrayList;
+import android.support.v7.app.AppCompatActivity;
 
 public class CeremonyDetailActivity extends AppCompatActivity {
 

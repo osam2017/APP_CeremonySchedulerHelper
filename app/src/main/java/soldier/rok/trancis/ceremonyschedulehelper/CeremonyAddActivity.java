@@ -4,22 +4,24 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
+import static soldier.rok.trancis.ceremonyschedulehelper.R.id.btn_add_page_cancel;
 
 
 public class CeremonyAddActivity extends AppCompatActivity {
@@ -30,18 +32,24 @@ public class CeremonyAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ceremony_add);
 
-        TextView text_input_ceremony_date = (TextView) findViewById(R.id.text_input_ceremony_date);
+        EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
+        TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
         Button btn_add_page_confirm = (Button)findViewById(R.id.btn_add_page_confirm);
         Button btn_add_page_cancel = (Button)findViewById(R.id.btn_add_page_cancel);
 
+        //라디오 버튼 객체 선원
+        RadioButton btn_rg_1 = (RadioButton)findViewById(R.id.btn_rg_1);
+        RadioButton btn_rg_2 = (RadioButton)findViewById(R.id.btn_rg_2);
+        RadioButton btn_rg_3 = (RadioButton)findViewById(R.id.btn_rg_3);
+        RadioButton btn_rg_4 = (RadioButton)findViewById(R.id.btn_rg_4);
+        RadioButton btn_rg_5 = (RadioButton)findViewById(R.id.btn_rg_5);
+        RadioButton btn_rg_6 = (RadioButton)findViewById(R.id.btn_rg_6);
+        RadioButton btn_rg_7 = (RadioButton)findViewById(R.id.btn_rg_7);
+        RadioButton btn_rg_8 = (RadioButton)findViewById(R.id.btn_rg_8);
+        RadioButton btn_rg_9 = (RadioButton)findViewById(R.id.btn_rg_9);
 
 
-
-
-
-
-
-       /*
+        /*
         btn_add_page_confirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -58,6 +66,62 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btn_rg_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.1 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.2 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.3 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.4 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.5 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.6 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.7 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.8 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_rg_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "no.9 selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         init();
