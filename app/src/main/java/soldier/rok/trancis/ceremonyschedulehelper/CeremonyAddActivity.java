@@ -4,7 +4,9 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,7 @@ import java.util.Date;
 
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
+import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 
 public class CeremonyAddActivity extends AppCompatActivity {
@@ -28,6 +31,12 @@ public class CeremonyAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ceremony_add);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_add);
+        toolbar.setTitle(auth.getNick());
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
 
         EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
         TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
