@@ -7,6 +7,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
@@ -22,6 +25,9 @@ public class MainPageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+
+        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+        ArrayList<String> arrayList1 = new ArrayList<String>(2);
 
 
 
