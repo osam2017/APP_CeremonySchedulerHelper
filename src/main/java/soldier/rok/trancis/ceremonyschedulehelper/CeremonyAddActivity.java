@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -132,6 +133,19 @@ public class CeremonyAddActivity extends AppCompatActivity {
 
         init();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private void init() {
 

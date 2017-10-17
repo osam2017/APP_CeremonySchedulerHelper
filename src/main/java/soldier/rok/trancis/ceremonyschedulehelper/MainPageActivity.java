@@ -17,12 +17,21 @@ public class MainPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+<<<<<<< HEAD
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
+=======
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        setSupportActionBar(toolbar);
+>>>>>>> master
 
 
 
