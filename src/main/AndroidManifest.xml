@@ -29,8 +29,15 @@
         <activity android:name=".SignUpActivity" />
         <activity
             android:name=".MainPageActivity"
-            android:label="@string/title_activity_main_page"
-            ></activity>
+            android:label="@string/title_activity_main_page" />
+        <activity android:name=".CeremonyAddActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CeremonyDetailActivity"></activity>
     </application>
 
 </manifest>

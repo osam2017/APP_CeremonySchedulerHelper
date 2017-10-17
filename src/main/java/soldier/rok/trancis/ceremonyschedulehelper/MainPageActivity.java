@@ -17,7 +17,7 @@ public class MainPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_page);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("R.id.user_unique_id");
+        toolbar.setTitle("user_nickname");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -26,7 +26,7 @@ public class MainPageActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
+                Intent intent = new Intent(getBaseContext(), CeremonyAddActivity.class);
                 startActivity(intent);
             }
         });
