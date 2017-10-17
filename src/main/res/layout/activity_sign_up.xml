@@ -52,13 +52,13 @@
             android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/sign_up_user_email"
+            android:id="@+id/sign_up_user_nickname"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="#000000"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Nickname"
             android:textColor="#000000"
             android:textColorHint="#000000"
             android:textSize="15dp" />
@@ -84,6 +84,7 @@
             android:layout_marginTop="100dp"
             android:alpha="0.75"
             android:background="@android:color/black"
+            android:onClick="onSignUp"
             android:text="Sign up"
             android:textColor="#FFFFFF"
             android:textSize="35dp" />

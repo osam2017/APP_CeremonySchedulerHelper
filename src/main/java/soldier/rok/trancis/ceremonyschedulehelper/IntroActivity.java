@@ -1,11 +1,9 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
-import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-
-import soldier.rok.trancis.ceremonyschedulehelper.R;
+import android.support.v7.app.AppCompatActivity;
 
 public class IntroActivity extends AppCompatActivity {
 

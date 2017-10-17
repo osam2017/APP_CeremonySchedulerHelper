@@ -23,69 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/my_toolbar_ceremony_detail">
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ceremony_group_1st_list"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/ceremony_group_2nd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ceremony_group_1st"
-        >
-
         <ListView
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ceremony_group_2nd_list"/>
+            android:id="@+id/ceremony_category_group"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/ceremony_group_3rd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ceremony_group_2nd">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ceremony_group_3rd_list"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/ceremony_group_4th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ceremony_group_3rd">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ceremony_group_4th_list"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/ceremony_group_5th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ceremony_group_4th">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ceremony_group_5th_list"/>
-
-    </LinearLayout>
-
 
 
 </RelativeLayout>
