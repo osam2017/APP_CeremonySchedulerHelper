@@ -25,6 +25,14 @@ public class SignUpActivity extends AppCompatActivity {
         et_nickname = (EditText) findViewById(R.id.sign_up_user_nickname) ;
         Button btn_sign_up = (Button) findViewById(R.id.btn_sign_up);
 
+        btn_sign_up.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void onSignUp(View v){
