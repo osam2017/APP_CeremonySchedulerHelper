@@ -4,7 +4,6 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +19,6 @@ import java.util.Date;
 
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
-import static soldier.rok.trancis.ceremonyschedulehelper.R.id.btn_add_page_cancel;
 
 
 public class CeremonyAddActivity extends AppCompatActivity {

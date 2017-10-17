@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         btn_main_sign_up.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);//원래 signupactivity였음.
+                Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(intent);
             }
         });
