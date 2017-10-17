@@ -16,6 +16,11 @@ public class MainPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
+        toolbar.setTitle(auth.getNick());
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
 
 <<<<<<< HEAD
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
@@ -45,6 +50,14 @@ public class MainPageActivity extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public void onBackPressed() {
+    }
+}
+>>>>>>> b99731280174c9aacb2c0cbf649396ec06938914
 
     @Override
     public void onBackPressed() {
