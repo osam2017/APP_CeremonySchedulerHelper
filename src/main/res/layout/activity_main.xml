@@ -74,6 +74,7 @@
             android:layout_marginTop="40dp"
             android:alpha="0.75"
             android:background="@android:color/black"
+            android:onClick="SignInClick"
             android:text="Sign in"
             android:textColor="#FFFFFF"
             android:textSize="35dp" />

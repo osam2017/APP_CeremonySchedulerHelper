@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
+
 public class MainPageActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +19,7 @@ public class MainPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_page);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("R.id.user_unique_id");
+        toolbar.setTitle(auth.getNick());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
