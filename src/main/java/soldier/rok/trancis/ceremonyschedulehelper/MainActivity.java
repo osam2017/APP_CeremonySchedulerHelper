@@ -15,6 +15,9 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String SERVER_URL = "http://10.53.128.114:8080";
+    public static String LOGIN_URL = "http://10.53.128.114:8080/users/login";
+
     public static Context m_Ctxt;
     public static Authentication auth = new Authentication();
     String sId, sPw;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         EditText et_pw = (EditText)findViewById(R.id.login_user_passwordText);
         sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
-        new SignIn(sId, sPw).execute("http://10.53.128.114:8080/users/login");
+        new SignIn(sId, sPw).execute(LOGIN_URL);
     }
 
     @Override

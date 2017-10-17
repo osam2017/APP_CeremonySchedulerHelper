@@ -2,7 +2,10 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.os.AsyncTask;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -42,11 +45,20 @@ public class SignIn extends AsyncTask<String, String, String> {
             os.close();
             int response = con.getResponseCode();
             if (response == HttpURLConnection.HTTP_NOT_FOUND){
-
             }
             else if(response == HttpURLConnection.HTTP_OK)
             {
+                InputStream is = con.getInputStream();
+                BufferedReader in = new BufferedReader(new InputStreamReader(is), 8*1024);
+                String line = null;
+                StringBuffer buff = new StringBuffer();
+                while((line = in.readLine()) != null)
+                {
+                    buff.append(line+"\n");
+                }
+                String data = buff.toString().trim();
                 m_bSuccess = true;
+                return data;
             }
             else {
             }
