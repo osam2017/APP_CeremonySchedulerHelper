@@ -22,11 +22,19 @@
              android:layout_below="@id/my_toolbar_ceremony_add"
              android:orientation="vertical">
 
-         <Button
+
+             <TextView
+                 android:id="@+id/textView"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:textSize="40dp"
+                 android:text="user_selected_date" />
+
+             <Button
             android:id="@+id/btn_date_picker_dialog"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="call him" />
+            android:text="select date" />
 
          </LinearLayout>
 
