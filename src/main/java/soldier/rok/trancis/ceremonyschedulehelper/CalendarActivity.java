@@ -1,4 +1,4 @@
-package soldier.rok.trancis.ceremonyschedulehelper;
+/*package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +15,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        //setContentView(R.layout.activity_calendar);
 
         CalendarView calendar = (CalendarView)findViewById(R.id.calendar);
 
@@ -34,5 +34,5 @@ public class CalendarActivity extends AppCompatActivity {
 
 }
 
-
+*/
 

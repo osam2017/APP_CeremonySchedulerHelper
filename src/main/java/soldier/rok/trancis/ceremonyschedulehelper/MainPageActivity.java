@@ -12,13 +12,12 @@ import android.view.View;
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class MainPageActivity extends AppCompatActivity {
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_top);
         toolbar.setTitle(auth.getNick());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -32,6 +31,10 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
 

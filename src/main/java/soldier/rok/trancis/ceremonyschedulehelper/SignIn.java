@@ -13,6 +13,7 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 public class SignIn extends AsyncTask<String, String, String> {
     String m_strId;
     String m_strPassword;
+    boolean m_bSuccess = false;
 
     public SignIn(String strId, String strPassword){
         m_strId = strId;
@@ -39,9 +40,17 @@ public class SignIn extends AsyncTask<String, String, String> {
             os.write(strData.getBytes("UTF-8"));
             os.flush();
             os.close();
-            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-            } else {
+            int response = con.getResponseCode();
+            if (response == HttpURLConnection.HTTP_NOT_FOUND){
+
             }
+            else if(response == HttpURLConnection.HTTP_OK)
+            {
+                m_bSuccess = true;
+            }
+            else {
+            }
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -57,7 +66,10 @@ public class SignIn extends AsyncTask<String, String, String> {
     }
 
     protected void onPostExecute(String result) {
-        auth.SetNick(result);
-        auth.SetAuth(true);
+        if(m_bSuccess == true) {
+            auth.SetNick(result);
+            auth.SetAuth(true);
+        }
+        ((MainActivity)(MainActivity.m_Ctxt)).onResume();
     }
 }

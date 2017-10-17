@@ -15,4 +15,8 @@ public class Authentication {
     protected String getNick(){
         return m_strNickName;
     }
+
+    protected boolean getAuth(){
+        return m_bAuthenticated;
+    }
 }
