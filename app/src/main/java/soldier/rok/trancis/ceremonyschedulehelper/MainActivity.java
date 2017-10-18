@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        auth.SetAuth(true);
+        auth.SetNick("Test");
     }
 
     public void SignInClick(View v){
