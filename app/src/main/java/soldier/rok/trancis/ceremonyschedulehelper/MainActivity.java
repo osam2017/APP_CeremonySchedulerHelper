@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(auth.getAuth() == true)
         {
-            Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
+            Intent intent = new Intent(this, MainPageActivity.class);
             startActivity(intent);
             finish();
         }

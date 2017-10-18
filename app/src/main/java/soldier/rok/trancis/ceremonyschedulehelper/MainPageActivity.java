@@ -6,19 +6,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
-public class MainPageActivity extends AppCompatActivity {
-    Toolbar toolbar;
+public class MainPageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private ArrayList<ListData> listDataArray = new ArrayList<ListData>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        ListData data1 = new ListData("2017/10/18", "김정환상병 진급","진급식");
+        listDataArray.add(data1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick());
@@ -27,8 +34,9 @@ public class MainPageActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
 
         ListView listView = (ListView)findViewById(R.id.list_user_schedule);
-        ArrayList<String> arrayList1 = new ArrayList<String>(2);
-
+        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+        listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(this);
 
 
 
@@ -46,4 +54,12 @@ public class MainPageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
+        Intent intent_list_click = new Intent(getBaseContext(), CeremonyDetailActivity.class);
+        startActivity(intent_list_click);
+    }
+
+
 }

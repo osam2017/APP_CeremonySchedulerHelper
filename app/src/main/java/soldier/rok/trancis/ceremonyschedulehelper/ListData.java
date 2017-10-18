@@ -1,27 +1,36 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
-/**
- * Created by Administrator on 2017-10-18.
- */
+
 
 public class ListData {
-    private String text1;
-    private String text2;
+    private String text_ceremony_date;
+    private String text_ceremony_name;
+    private String text_ceremony_detail;
 
 
 
-    ListData(String text1, String text2){
-        this.text1 = text1;
-        this.text2 = text2;
+
+    ListData(String text_date, String text1, String text_ceremony_detail){
+
+        this.text_ceremony_date = text_date;
+        this.text_ceremony_name = text1;
+        this.text_ceremony_detail = text_ceremony_detail;
+
     }
 
-    public String getText1() {
-        return text1;
+    public String getText_ceremony_date() {
+        return text_ceremony_date;
     }
 
-    public String getText2() {
-        return text2;
+    public String getText_ceremony_name() {
+        return text_ceremony_name;
     }
+
+    public String getText_ceremony_detail() {
+        return text_ceremony_detail;
+    }
+
+
 
 
 }
