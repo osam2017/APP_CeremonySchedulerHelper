@@ -36,7 +36,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="행사명을 적어주세요"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:inputType="text"/>
 
 
         <TextView

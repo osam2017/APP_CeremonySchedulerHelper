@@ -222,4 +222,5 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
             }
         }
     }
+
 }

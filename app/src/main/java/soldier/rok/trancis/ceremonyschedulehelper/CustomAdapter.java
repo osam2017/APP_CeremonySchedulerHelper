@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class CustomAdapter extends ArrayAdapter<ListData> {
     private  Context context;
     private int layoutResourceId;
-    private  ArrayList<ListData> listData;
+    public  ArrayList<ListData> listData;
 
     public  CustomAdapter(Context context, int layoutResourceId, ArrayList<ListData> listData){
         super(context,layoutResourceId, listData);
