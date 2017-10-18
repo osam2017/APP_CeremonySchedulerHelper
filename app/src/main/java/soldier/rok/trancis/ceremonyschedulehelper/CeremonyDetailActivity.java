@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import android.media.MediaPlayer;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class CeremonyDetailActivity extends AppCompatActivity {
@@ -74,10 +76,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView( R.layout.custom_dialog);
-                dialog.setTitle("애국가 제창");
+                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                tv1.setText("애국가 제창");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv.setText("애국가 1~4절을 제창하세요");
+                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                tv2.setText("애국가 1~4절을 제창하세요");
                 iv.setImageResource(R.drawable.korean_flag);
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
@@ -92,10 +95,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView( R.layout.custom_dialog);
-                dialog.setTitle("경례");
+                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                tv1.setText("경례");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv.setText("경례하세요");
+                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                tv2.setText("경례하세요");
                 iv.setImageResource(R.drawable.korean_flag);
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
@@ -110,10 +114,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView( R.layout.custom_dialog);
-                dialog.setTitle("신고");
+                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                tv1.setText("신고");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv.setText("신!고!합니다.");
+                TextView tv2= (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                tv2.setText("신!고!합니다.");
                 iv.setImageResource(R.drawable.korean_flag);
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +133,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView( R.layout.custom_dialog);
-                dialog.setTitle("훈시");
+                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                tv1.setText("훈시");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv.setText("충성! 훈시!");
+                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                tv2.setText("충성! 훈시!");
                 iv.setImageResource(R.drawable.korean_flag);
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
