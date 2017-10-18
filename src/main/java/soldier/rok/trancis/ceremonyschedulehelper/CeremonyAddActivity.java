@@ -2,6 +2,7 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -23,12 +24,16 @@ import java.util.Date;
 
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
+import static java.util.Calendar.getInstance;
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 
 public class CeremonyAddActivity extends AppCompatActivity {
     private String TAG = "PickerActivity";
-    String checkedbtn;
+    private String checkedbtn;
+    private int myear;
+    private int mmonth;
+    private int mday;
 
 
 
@@ -49,8 +54,17 @@ public class CeremonyAddActivity extends AppCompatActivity {
         final EditText text_input_ceremony_detail =(EditText) findViewById(R.id.text_input_ceremony_detail);
         final TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_date);
         final TextView text_disp_ceremony_type_ask = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
+        Button btn_date_picker_dialog = (Button)findViewById((R.id.btn_date_picker_dialog);
         Button btn_add_page_confirm = (Button)findViewById(R.id.btn_add_page_confirm);
         Button btn_add_page_cancel = (Button)findViewById(R.id.btn_add_page_cancel);
+
+        btn_date_picker_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog datepicker = new DatePickerDialog(CeremonyAddActivity.this, dateSetListner)
+            }
+        });
+
 
         //라디오 그룹 선언
         final RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup_ceremony_type);
@@ -119,7 +133,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
 
 
 
-        init();
     }
 
     @Override
@@ -134,36 +147,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
     }
 
 
-
-    private void init() {
-
-        //Calendar를 이용하여 년, 월, 일, 시간, 분을 PICKER에 넣어준다.
-        final Calendar cal = Calendar.getInstance();
-
-        Log.e(TAG, cal.get(YEAR) + "");
-        Log.e(TAG, cal.get(MONTH) + 1 + "");
-        Log.e(TAG, cal.get(Calendar.DATE) + "");
-        Log.e(TAG, cal.get(Calendar.HOUR_OF_DAY) + "");
-        Log.e(TAG, cal.get(Calendar.MINUTE) + "");
-
-
-        //DATE PICKER DIALOG
-        findViewById(R.id.btn_date_picker_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatePickerDialog dialog = new DatePickerDialog(CeremonyAddActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        final String m_currentdate = String.format("%d / %d / %d ", year, month + 1, date);
-                    }
-                }, cal.get(YEAR), cal.get(MONTH), cal.get(Calendar.DATE));
-
-                dialog.getDatePicker().setMinDate(new Date().getTime());    //현재 날짜 이후로 클릭 안되게 옵션
-                dialog.show();
-
-            }
-        });
 
 
     }
