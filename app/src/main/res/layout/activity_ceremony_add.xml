@@ -36,18 +36,26 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="행사명을 적어주세요"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
+
+            <EditText
+            android:id="@+id/text_input_ceremony_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="내용을 적어주세요"
+            android:textSize="20dp" />
 
 
         <TextView
             android:id="@+id/text_disp_ceremony_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
 
             android:text="년 월 일"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btn_date_picker_dialog"
@@ -142,6 +150,14 @@
                 android:text="하관식(안장)"
                 android:layout_weight="1" />
             <!--하관식(안장)-->
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/btn_rg_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="하관식(안장)"
+                android:layout_weight="1" />
+            <!--사용자정의-->
+
 
 
         </RadioGroup>

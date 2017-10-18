@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -33,7 +32,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+               ListView listView = (ListView)findViewById(R.id.list_user_schedule);
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
         listView.setAdapter(customAdapter);
         listView.setOnItemClickListener(this);
@@ -49,17 +48,21 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 startActivity(intent);
             }
         });
+
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
+        Intent intent = new Intent(this, CeremonyDetailActivity.class);
+        intent.putExtra("position", position);
     }
 
     @Override
     public void onBackPressed() {
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
-        Intent intent_list_click = new Intent(this, CeremonyDetailActivity.class);
-        startActivity(intent_list_click);
-    }
+
 
 
 
