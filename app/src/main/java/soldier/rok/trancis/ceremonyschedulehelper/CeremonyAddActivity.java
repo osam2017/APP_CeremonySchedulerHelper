@@ -62,25 +62,25 @@ public class CeremonyAddActivity extends AppCompatActivity {
                     if(checkedId == R.id.btn_rg_1){
                         checkedbtn = "1";
                     }
-                    if(checkedId == R.id.btn_rg_2){
+                    else if(checkedId == R.id.btn_rg_2){
                         checkedbtn = "2";
                     }
-                    if(checkedId == R.id.btn_rg_3){
+                    else if(checkedId == R.id.btn_rg_3){
                         checkedbtn = "3";
                     }
-                    if(checkedId == R.id.btn_rg_4){
+                    else if(checkedId == R.id.btn_rg_4){
                         checkedbtn = "4";
                     }
-                    if(checkedId == R.id.btn_rg_5){
+                    else if(checkedId == R.id.btn_rg_5){
                         checkedbtn = "5";
                     }
-                    if(checkedId == R.id.btn_rg_6){
+                    else if(checkedId == R.id.btn_rg_6){
                         checkedbtn = "6";
                     }
-                    if(checkedId == R.id.btn_rg_7){
+                    else if(checkedId == R.id.btn_rg_7){
                         checkedbtn = "7";
                     }
-                    if(checkedId == R.id.btn_rg_8){
+                    else if(checkedId == R.id.btn_rg_8){
                         checkedbtn = "8";
                     }
                     if(checkedId == R.id.btn_rg_9){
