@@ -1,5 +1,6 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ public class SignIn extends AsyncTask<String, String, String> {
     String m_strId;
     String m_strPassword;
     boolean m_bSuccess = false;
+
 
     public SignIn(String strId, String strPassword){
         m_strId = strId;
@@ -85,6 +87,7 @@ public class SignIn extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         if(m_bSuccess == true) {
             try{
+                int i = result.indexOf("eid");
                 JSONParser jsonParser = new JSONParser();
                 JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
                 int uid = Integer.parseInt(jsonObj.get("uid").toString());
