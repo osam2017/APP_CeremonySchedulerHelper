@@ -7,7 +7,7 @@
     tools:context="soldier.rok.trancis.ceremonyschedulehelper.CeremonyDetailActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar_detail"
+        android:id="@+id/my_toolbar_ceremony_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         android:id="@+id/list_order_ceremony"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/my_toolbar_detail"
+        android:layout_below="@id/my_toolbar_ceremony_detail"
 
         >
     </ListView>
