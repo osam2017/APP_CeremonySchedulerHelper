@@ -2,6 +2,7 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -42,6 +44,7 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 public class CeremonyAddActivity extends AppCompatActivity {
     private String TAG = "PickerActivity";
     private String m_strCeremonyType;
+    Context m_Ctxt = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +124,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
                     String strTitle = ((EditText) findViewById(R.id.text_input_ceremony_name)).getText().toString();
                     String strSort = m_strCeremonyType;
 
-                    new PostSchedule(strDate, strTitle, strSort).execute(GLOBALVAR.SCHEDULE_URL);
+                    new PostSchedule(strDate, strTitle, strSort, auth.getUserId()).execute(GLOBALVAR.SCHEDULE_URL);
                 }
             }
         });
@@ -212,11 +215,13 @@ public class CeremonyAddActivity extends AppCompatActivity {
         String m_strDate;
         String m_strTitle;
         String m_strSort;
+        int m_iUid;
 
-        public PostSchedule(String strDate, String strTitle, String strSort){
+        public PostSchedule(String strDate, String strTitle, String strSort, int iUid){
             m_strDate = strDate;
             m_strTitle = strTitle;
             m_strSort = strSort;
+            m_iUid = iUid;
         }
 
         @Override
@@ -235,7 +240,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 con.setDoOutput(true);
 
                 OutputStream os = con.getOutputStream();
-                String strData = "date=" + m_strDate + "&title=" + m_strTitle + "&sort=" + m_strSort;
+                String strData = "date=" + m_strDate + "&title=" + m_strTitle + "&sort=" + m_strSort +"&uid=" + m_iUid;
                 os.write(strData.getBytes("UTF-8"));
                 os.flush();
                 os.close();
@@ -273,9 +278,19 @@ public class CeremonyAddActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-            Intent intent = new Intent(getApplicationContext(), CeremonyDetailActivity.class);
+
+            String strEx = "*";
+            JSONParser jsonParser = new JSONParser();
+            org.json.simple.JSONObject jsonObj = null;
+            try {
+                jsonObj = (org.json.simple.JSONObject) jsonParser.parse(result);
+                strEx = jsonObj.get("title").toString();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
             startActivity(intent);
-            finish();
         }
     }
 }

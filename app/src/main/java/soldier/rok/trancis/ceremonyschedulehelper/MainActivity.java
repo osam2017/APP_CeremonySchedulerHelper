@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         if(auth.getAuth() == true)
         {
             Intent intent = new Intent(this, MainPageActivity.class);
-            startActivity(intent);
+                startActivity(intent);
             finish();
         }
     }
