@@ -7,9 +7,6 @@ public class ListData {
     private String text_ceremony_name;
     private String text_ceremony_detail;
 
-
-
-
     ListData(String text_date, String text1, String text_ceremony_detail){
 
         this.text_ceremony_date = text_date;

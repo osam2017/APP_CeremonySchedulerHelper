@@ -6,6 +6,6 @@ public class GLOBALVAR {
     public final static String SIGNIN_URL = HOST_SERVER_URL + "/users/login";
     public final static String RELATION_URL = HOST_SERVER_URL + "/relations";
     public final static String RELATION_EID_URL = HOST_SERVER_URL + "/relations/eid";
-    public final static String RELATION_IDNAME_URL = HOST_SERVER_URL + "/relations/idname";
+    public final static String RELATION_IDNAME_URL = HOST_SERVER_URL + "/relations/uid";
     public final static String SCHEDULE_URL = HOST_SERVER_URL + "/schedules";
 }

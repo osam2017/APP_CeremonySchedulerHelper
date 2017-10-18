@@ -30,7 +30,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ceremony_detail);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

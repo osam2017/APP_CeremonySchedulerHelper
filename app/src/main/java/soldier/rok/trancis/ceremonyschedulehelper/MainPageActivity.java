@@ -1,5 +1,6 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -32,6 +34,8 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 public class MainPageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<ListData> listDataArray = new ArrayList<ListData>();
+    public static Context m_Ctxt;
+    String testStr1, testStr2, testStr3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,11 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_main_page);
 
         //get schedules from server
+        new GetEidByUid().execute();
+
+
+        ListData data1 = new ListData("a", "b", "C");
+        listDataArray.add(data1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick()+"의 행사 내역");
@@ -46,10 +55,6 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
-        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
-        listView.setAdapter(customAdapter);
-        listView.setOnItemClickListener(this);
 
 
 
@@ -65,9 +70,14 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     }
 
     @Override
-    protected void onResume(){
+    public void onResume() {
         super.onResume();
-        new GetScheduleByUid().execute();
+
+
+        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+        listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -81,8 +91,14 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         startActivity(intent_list_click);
     }
 
+    public class GetScheduleByEId extends AsyncTask<String, String, String> {
+        int m_iEid;
+        public GetScheduleByEId(int iEid)
+        {
+            m_iEid = iEid;
+        }
 
-    public class GetScheduleByUid extends AsyncTask<String, String, String> {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -93,7 +109,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
             BufferedInputStream bis = null;
             StringBuilder sb = new StringBuilder();
             try {
-                URL url = new URL(GLOBALVAR.SCHEDULE_URL+"/uid/" + auth.getUserId());
+                URL url = new URL(GLOBALVAR.SCHEDULE_URL+ "/" + m_iEid);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 int responseCode;
@@ -125,7 +141,85 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         }
 
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+            try{
+                JSONParser jsonParser = new JSONParser();
+                JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
+                String strTitle = jsonObj.get("title").toString();
+                String strDate = jsonObj.get("date").toString();
+                listDataArray.add(1, new ListData(strTitle, strDate, "C"));
+                onResume();
+            }
+            catch(ParseException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public class GetEidByUid extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            BufferedInputStream bis = null;
+            StringBuilder sb = new StringBuilder();
+            try {
+                URL url = new URL(GLOBALVAR.RELATION_IDNAME_URL+ "/" + auth.getUserId());
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                int responseCode;
+
+                con.setConnectTimeout(1500);
+                con.setReadTimeout(1500);
+
+                responseCode = con.getResponseCode();
+                if (responseCode == 200) {
+                    bis = new BufferedInputStream(con.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(bis, "UTF-8"));
+
+                    String line = null;
+                    while ((line = reader.readLine()) != null)
+                        sb.append(line);
+                    bis.close();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return sb.toString();
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+            //show 등록중입니다 프로세스
+        }
+
+        protected void onPostExecute(String result) {
+            try{
+                String[] strArr = result.split(",");
+                //get eids
+                int[] iaEids = new int[strArr.length/4];
+                int iIndex =0;
+                for(int i=0; i<strArr.length; i++)
+                {
+                    if(strArr[i].contains("eid"))
+                    {
+                        String strNum = strArr[i].replaceAll("\\D", "");
+                        iaEids[iIndex] = Integer.parseInt(strNum);
+                        new GetScheduleByEId(iaEids[iIndex]).execute();
+                        iIndex++;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
     }
 }

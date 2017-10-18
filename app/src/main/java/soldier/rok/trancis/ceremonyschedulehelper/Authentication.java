@@ -24,6 +24,7 @@ public class Authentication {
     protected boolean getAuth(){
         return m_bAuthenticated;
     }
+
     protected int getUserId(){
         return m_iUserId;
     }

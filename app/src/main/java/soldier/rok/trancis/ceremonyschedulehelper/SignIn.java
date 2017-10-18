@@ -87,6 +87,7 @@ public class SignIn extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         if(m_bSuccess == true) {
             try{
+                int i = result.indexOf("eid");
                 JSONParser jsonParser = new JSONParser();
                 JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
                 int uid = Integer.parseInt(jsonObj.get("uid").toString());
