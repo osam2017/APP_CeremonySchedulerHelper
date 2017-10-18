@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,10 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class CeremonyAddActivity extends AppCompatActivity {
     private String TAG = "PickerActivity";
+    String checkedbtn;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,37 +39,74 @@ public class CeremonyAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ceremony_add);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_add);
-        toolbar.setTitle(auth.getNick());
+        toolbar.setTitle("행사 추가");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
-        TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
+        final EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
+        final EditText text_input_ceremony_detail =(EditText) findViewById(R.id.text_input_ceremony_detail);
+        final TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_date);
+        final TextView text_disp_ceremony_type_ask = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
         Button btn_add_page_confirm = (Button)findViewById(R.id.btn_add_page_confirm);
         Button btn_add_page_cancel = (Button)findViewById(R.id.btn_add_page_cancel);
 
-        //라디오 버튼 객체 선원
-        RadioButton btn_rg_1 = (RadioButton)findViewById(R.id.btn_rg_1);
-        RadioButton btn_rg_2 = (RadioButton)findViewById(R.id.btn_rg_2);
-        RadioButton btn_rg_3 = (RadioButton)findViewById(R.id.btn_rg_3);
-        RadioButton btn_rg_4 = (RadioButton)findViewById(R.id.btn_rg_4);
-        RadioButton btn_rg_5 = (RadioButton)findViewById(R.id.btn_rg_5);
-        RadioButton btn_rg_6 = (RadioButton)findViewById(R.id.btn_rg_6);
-        RadioButton btn_rg_7 = (RadioButton)findViewById(R.id.btn_rg_7);
-        RadioButton btn_rg_8 = (RadioButton)findViewById(R.id.btn_rg_8);
-        RadioButton btn_rg_9 = (RadioButton)findViewById(R.id.btn_rg_9);
+        //라디오 그룹 선언
+        final RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup_ceremony_type);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(group==rg){
+                    if(checkedId == R.id.btn_rg_1){
+                        checkedbtn = "1";
+                    }
+                    else if(checkedId == R.id.btn_rg_2){
+                        checkedbtn = "2";
+                    }
+                    else if(checkedId == R.id.btn_rg_3){
+                        checkedbtn = "3";
+                    }
+                    else if(checkedId == R.id.btn_rg_4){
+                        checkedbtn = "4";
+                    }
+                    else if(checkedId == R.id.btn_rg_5){
+                        checkedbtn = "5";
+                    }
+                    else if(checkedId == R.id.btn_rg_6){
+                        checkedbtn = "6";
+                    }
+                    else if(checkedId == R.id.btn_rg_7){
+                        checkedbtn = "7";
+                    }
+                    else if(checkedId == R.id.btn_rg_8){
+                        checkedbtn = "8";
+                    }
+                    if(checkedId == R.id.btn_rg_9){
+                        checkedbtn = "9";
+                    }
+                    if(checkedId == R.id.btn_rg_10){
+                        checkedbtn = "10";
+                    }
+                }
+            }
+
+        });
 
 
-        /*
         btn_add_page_confirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getBaseContext(), 1234.class);
+                Intent intent = new Intent(getBaseContext(), ScheduleUpload.class);
+                intent.putExtra("date", text_disp_ceremony_date.getText().toString());
+                intent.putExtra("name", text_input_ceremony_name.getText().toString());
+                intent.putExtra("detail", text_input_ceremony_detail.getText().toString());
+                intent.putExtra("type", checkedbtn);
                 startActivity(intent);
             }
         });
-*/
+
         btn_add_page_cancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -74,60 +116,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
             }
         });
 
-        btn_rg_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.1 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.2 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.3 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.4 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.5 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.6 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.7 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.8 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-        btn_rg_9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "no.9 selected", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 
@@ -159,8 +147,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
         Log.e(TAG, cal.get(Calendar.MINUTE) + "");
 
 
-
-
         //DATE PICKER DIALOG
         findViewById(R.id.btn_date_picker_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,9 +155,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(CeremonyAddActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-
-                        String msg = String.format("%d 년 %d 월 %d 일", year, month + 1, date);
-                        Toast.makeText(CeremonyAddActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        final String m_currentdate = String.format("%d / %d / %d ", year, month + 1, date);
                     }
                 }, cal.get(YEAR), cal.get(MONTH), cal.get(Calendar.DATE));
 
@@ -183,4 +167,5 @@ public class CeremonyAddActivity extends AppCompatActivity {
 
 
     }
+
 }

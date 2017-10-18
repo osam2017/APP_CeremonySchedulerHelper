@@ -33,10 +33,11 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
             android:ems="10"
-            android:hint="ID"
+            android:hint="아이디"
             android:textColor="#000000"
             android:textColorHint="#000000"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/sign_up_user_password"
@@ -45,11 +46,12 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="#000000"
             android:ems="10"
-            android:hint="Password"
+            android:hint="비밀번호"
             android:inputType="textPassword"
             android:textColor="#000000"
             android:textColorHint="#000000"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            />
 
         <EditText
             android:id="@+id/sign_up_user_nickname"
@@ -58,10 +60,11 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="#000000"
             android:ems="10"
-            android:hint="Nickname"
+            android:hint="닉네임"
             android:textColor="#000000"
             android:textColorHint="#000000"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:inputType="text"/>
 
 
     </LinearLayout>
@@ -85,7 +88,7 @@
             android:alpha="0.75"
             android:background="@android:color/black"
             android:onClick="onSignUp"
-            android:text="Sign up"
+            android:text="회원가입"
             android:textColor="#FFFFFF"
             android:textSize="35dp" />
     </LinearLayout>

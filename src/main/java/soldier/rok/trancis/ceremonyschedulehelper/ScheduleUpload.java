@@ -11,15 +11,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SignUp extends AsyncTask<String, String, String> {
-    String m_strId;
-    String m_strPassword;
-    String m_strNickname;
+public class ScheduleUpload extends AsyncTask<String, String, String> {
+    String m_str_ceremony_date;
+    String m_str_ceremony_name;
+    String m_str_ceremony_detail;
+    String m_str_ceremony_type;
 
-    public SignUp(String strId, String strPassword, String strNickname){
-        m_strId = strId;
-        m_strPassword = strPassword;
-        m_strNickname = strNickname;
+    public ScheduleUpload(String str_ceremony_date, String str_ceremony_name, String str_ceremony_detail, String str_ceremony_type){
+        m_str_ceremony_date = str_ceremony_date;
+        m_str_ceremony_name = str_ceremony_name;
+        m_str_ceremony_detail = str_ceremony_detail;
+        m_str_ceremony_type = str_ceremony_type;
     }
 
     @Override
@@ -38,7 +40,8 @@ public class SignUp extends AsyncTask<String, String, String> {
             con.setDoOutput(true);
 
             OutputStream os = con.getOutputStream();
-            String strData = "id=" + m_strId + "&password=" + m_strPassword + "&nickname=" + m_strNickname;
+            String strData = "DATE=" + m_str_ceremony_date + "&NAME=" + m_str_ceremony_name
+                    + "&DETAIL=" + m_str_ceremony_detail +"&TYPE" + m_str_ceremony_type;
             os.write(strData.getBytes("UTF-8"));
             os.flush();
             os.close();
@@ -60,6 +63,6 @@ public class SignUp extends AsyncTask<String, String, String> {
     }
 
     protected void onPostExecute(String result) {
-        new SignIn(m_strId, m_strPassword).execute(GLOBALVAR.SIGNIN_URL);
+        new ScheduleUpload(m_str_ceremony_date, m_str_ceremony_name, m_str_ceremony_detail, m_str_ceremony_type).execute();//"http://10.53.128.114:8080/users/login");
     }
 }

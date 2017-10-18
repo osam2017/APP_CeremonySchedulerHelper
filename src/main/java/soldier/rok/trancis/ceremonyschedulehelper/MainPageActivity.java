@@ -7,36 +7,36 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
-public class MainPageActivity extends AppCompatActivity {
-    Toolbar toolbar;
+public class MainPageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private ArrayList<ListData> listDataArray = new ArrayList<ListData>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        //get schedules from server
+        ListData data1 = new ListData("2017/10/18", "김정환상병 진급","진급식");
+        listDataArray.add(data1);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
-        toolbar.setTitle(auth.getNick());
+        toolbar.setTitle(auth.getNick()+"의 행사 내역");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-<<<<<<< HEAD
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
-        toolbar.setTitle(auth.getNick());
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
-
-=======
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        setSupportActionBar(toolbar);
->>>>>>> master
+               ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+        listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(this);
 
 
 
@@ -49,17 +49,23 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
-<<<<<<< HEAD
-=======
+
+    @Override
+    public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
+        Intent intent = new Intent(this, CeremonyDetailActivity.class);
+        intent.putExtra("position", position);
+    }
 
     @Override
     public void onBackPressed() {
     }
-}
->>>>>>> b99731280174c9aacb2c0cbf649396ec06938914
 
-    @Override
-    public void onBackPressed() {
-    }
+
+
+
+
+
 }
