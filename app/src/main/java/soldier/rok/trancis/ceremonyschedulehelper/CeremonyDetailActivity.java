@@ -43,6 +43,8 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
+
+
         arrayList_ceremony_detail.add("애국가 제창");
         arrayList_ceremony_detail.add("상관에 대한 경례");
         arrayList_ceremony_detail.add("신고");
