@@ -34,7 +34,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ceremony_add);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_add);
-        toolbar.setTitle(auth.getNick());
+        toolbar.setTitle("행사 추가");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);

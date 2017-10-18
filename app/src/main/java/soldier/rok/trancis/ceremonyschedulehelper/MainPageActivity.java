@@ -28,7 +28,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         listDataArray.add(data1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
-        toolbar.setTitle(auth.getNick());
+        toolbar.setTitle(auth.getNick()+"의 행사 내역");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -57,9 +57,11 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
-        Intent intent_list_click = new Intent(getBaseContext(), CeremonyDetailActivity.class);
+        Intent intent_list_click = new Intent(this, CeremonyDetailActivity.class);
         startActivity(intent_list_click);
     }
+
+
 
 
 }
