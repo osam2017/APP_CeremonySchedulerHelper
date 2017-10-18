@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignUp(View v){
-        new SignUp(et_id.getText().toString(), et_password.getText().toString(), et_nickname.getText().toString()).execute("http://10.53.128.114:8080/users/signup");
+        new SignUp(et_id.getText().toString(), et_password.getText().toString(), et_nickname.getText().toString()).execute(GLOBALVAR.SIGNUP_URL);
     }
 
 }

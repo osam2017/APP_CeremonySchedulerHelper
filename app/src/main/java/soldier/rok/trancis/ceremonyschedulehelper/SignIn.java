@@ -39,7 +39,7 @@ public class SignIn extends AsyncTask<String, String, String> {
             con.setDoOutput(true);
 
             OutputStream os = con.getOutputStream();
-            String strData = "ID=" + m_strId + "&PASSWORD=" + m_strPassword;
+            String strData = "id=" + m_strId + "&password=" + m_strPassword;
             os.write(strData.getBytes("UTF-8"));
             os.flush();
             os.close();

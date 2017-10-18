@@ -24,6 +24,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        //get schedules from server
         ListData data1 = new ListData("2017/10/18", "김정환상병 진급","진급식");
         listDataArray.add(data1);
 

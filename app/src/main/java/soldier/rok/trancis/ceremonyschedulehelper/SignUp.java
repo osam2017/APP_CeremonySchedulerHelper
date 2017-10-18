@@ -38,7 +38,7 @@ public class SignUp extends AsyncTask<String, String, String> {
             con.setDoOutput(true);
 
             OutputStream os = con.getOutputStream();
-            String strData = "ID=" + m_strId + "&PASSWORD=" + m_strPassword + "&NICKNAME=" + m_strNickname;
+            String strData = "id=" + m_strId + "&password=" + m_strPassword + "&nickname=" + m_strNickname;
             os.write(strData.getBytes("UTF-8"));
             os.flush();
             os.close();
@@ -60,6 +60,6 @@ public class SignUp extends AsyncTask<String, String, String> {
     }
 
     protected void onPostExecute(String result) {
-        new SignIn(m_strId, m_strPassword).execute("http://10.53.128.114:8080/users/login");
+        new SignIn(m_strId, m_strPassword).execute(GLOBALVAR.SIGNIN_URL);
     }
 }
