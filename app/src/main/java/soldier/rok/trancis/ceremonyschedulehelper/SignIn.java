@@ -2,6 +2,11 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.os.AsyncTask;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,8 +84,19 @@ public class SignIn extends AsyncTask<String, String, String> {
 
     protected void onPostExecute(String result) {
         if(m_bSuccess == true) {
-            auth.SetNick(result);
-            auth.SetAuth(true);
+            try{
+                JSONParser jsonParser = new JSONParser();
+                JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
+                int uid = Integer.parseInt(jsonObj.get("uid").toString());
+                String strNick= jsonObj.get("nickname").toString();
+                auth.SetUserId(uid);
+                auth.SetAuth(true);
+                auth.SetNick(strNick);
+            }
+            catch(ParseException e)
+            {
+                e.printStackTrace();
+            }
         }
         ((MainActivity)(MainActivity.m_Ctxt)).onResume();
     }

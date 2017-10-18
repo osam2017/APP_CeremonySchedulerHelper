@@ -17,6 +17,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,17 +35,45 @@ public class CeremonyAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ceremony_add);
 
+        final Calendar cal = Calendar.getInstance();
+        int iYear = cal.get(Calendar.YEAR);
+        int iMonth = cal.get(Calendar.MONTH) + 1;
+        int iDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        final TextView tv_date = (TextView)findViewById(R.id.text_disp_ceremony_date);
+        EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
+        TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
+        Button btn_add_page_confirm = (Button)findViewById(R.id.btn_add_page_confirm);
+        Button btn_add_page_cancel = (Button)findViewById(R.id.btn_add_page_cancel);
+
+        tv_date.setText(iYear + "년 " + iMonth + "월 " + iDay + "일");
+
+        //DATE PICKER DIALOG
+        findViewById(R.id.btn_date_picker_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(CeremonyAddActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+
+                        tv_date.setText(year + "년 " + (month+1) + "월 " + date + "일");
+                    }
+                }, cal.get(YEAR), cal.get(MONTH), cal.get(Calendar.DATE));
+
+                dialog.getDatePicker().setMinDate(new Date().getTime());    //현재 날짜 이후로 클릭 안되게 옵션
+                dialog.show();
+            }
+        });
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_add);
         toolbar.setTitle("행사 추가");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        EditText text_input_ceremony_name = (EditText) findViewById(R.id.text_input_ceremony_name);
-        TextView text_disp_ceremony_date = (TextView) findViewById(R.id.text_disp_ceremony_type_ask);
-        Button btn_add_page_confirm = (Button)findViewById(R.id.btn_add_page_confirm);
-        Button btn_add_page_cancel = (Button)findViewById(R.id.btn_add_page_cancel);
 
         //라디오 버튼 객체 선원
         RadioButton btn_rg_1 = (RadioButton)findViewById(R.id.btn_rg_1);
@@ -55,6 +85,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
         RadioButton btn_rg_7 = (RadioButton)findViewById(R.id.btn_rg_7);
         RadioButton btn_rg_8 = (RadioButton)findViewById(R.id.btn_rg_8);
         RadioButton btn_rg_9 = (RadioButton)findViewById(R.id.btn_rg_9);
+        RadioButton btn_rg_10 = (RadioButton)findViewById(R.id.btn_rg_10);
 
 
         /*
@@ -129,10 +160,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "no.9 selected", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-        init();
     }
 
     @Override
@@ -144,44 +171,5 @@ public class CeremonyAddActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-
-
-    private void init() {
-
-        //Calendar를 이용하여 년, 월, 일, 시간, 분을 PICKER에 넣어준다.
-        final Calendar cal = Calendar.getInstance();
-
-        Log.e(TAG, cal.get(YEAR) + "");
-        Log.e(TAG, cal.get(MONTH) + 1 + "");
-        Log.e(TAG, cal.get(Calendar.DATE) + "");
-        Log.e(TAG, cal.get(Calendar.HOUR_OF_DAY) + "");
-        Log.e(TAG, cal.get(Calendar.MINUTE) + "");
-
-
-
-
-        //DATE PICKER DIALOG
-        findViewById(R.id.btn_date_picker_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatePickerDialog dialog = new DatePickerDialog(CeremonyAddActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-
-                        String msg = String.format("%d 년 %d 월 %d 일", year, month + 1, date);
-                        Toast.makeText(CeremonyAddActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                }, cal.get(YEAR), cal.get(MONTH), cal.get(Calendar.DATE));
-
-                dialog.getDatePicker().setMinDate(new Date().getTime());    //현재 날짜 이후로 클릭 안되게 옵션
-                dialog.show();
-
-            }
-        });
-
-
     }
 }
