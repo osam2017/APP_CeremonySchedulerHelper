@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         auth.SetAuth(true);
-        auth.SetNick("TEST");
+        auth.SetNick("TestNick");
+
 }
 
     public void SignInClick(View v){
