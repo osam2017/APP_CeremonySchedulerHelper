@@ -1,8 +1,10 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,26 +18,24 @@ import java.util.ArrayList;
 import android.media.MediaPlayer;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
+
 public class CeremonyDetailActivity extends AppCompatActivity {
-
-    private MediaPlayer mp_anthem;
-    private MediaPlayer mp_oath;
-    private MediaPlayer mp_salute;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ceremony_detail);
-        mp_anthem = MediaPlayer.create(this,R.raw.anthem_1);
-        mp_oath = MediaPlayer.create(this,R.raw.oath_to_flag);
-        mp_salute = MediaPlayer.create(this,R.raw.salute_to_field_officer);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
         final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
@@ -44,11 +44,10 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         listView.setAdapter(simpleAdapter2);
 
         arrayList_ceremony_detail.add("애국가 제창");
-        arrayList_ceremony_detail.add("상관에 대한 경례");
+        arrayList_ceremony_detail.add("경례");
         arrayList_ceremony_detail.add("신고");
         arrayList_ceremony_detail.add("훈시");
-        arrayList_ceremony_detail.add("상관에 대한 경례");
-        arrayList_ceremony_detail.add("국기에 대한 맹세");
+        arrayList_ceremony_detail.add("경례");
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,10 +60,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 if(mText_ceremony_type == "애국가 제창"){
                     showpopup_Anthem();
                 }
-                else if(mText_ceremony_type == "국기에 대한 맹세"){
-                    showpopup_Oath();
-                }
-                else if(mText_ceremony_type == "상관에 대한 경례"){
+                else if(mText_ceremony_type == "경례"){
                     showpopup_Salute();
                 }
                 else if(mText_ceremony_type == "신고"){
@@ -84,39 +80,12 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 tv1.setText("애국가 제창");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
                 TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv2.setText("애국가 1절을 제창하세요");
+                tv2.setText("애국가 1~4절을 제창하세요");
                 iv.setImageResource(R.drawable.korean_flag);
-
-                mp_anthem.start();
-
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mp_anthem.stop();
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-            public void showpopup_Oath()
-            {
-                final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
-                dialog.setContentView( R.layout.custom_dialog);
-                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
-                tv1.setText("맹세");
-                ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
-                tv2.setText("국기에 대한 맹세");
-                iv.setImageResource(R.drawable.korean_flag);
-
-                mp_oath.start();
-
-                Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
-                btn1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mp_oath.stop();
                         dialog.dismiss();
                     }
                 });
@@ -127,19 +96,15 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView( R.layout.custom_dialog);
                 TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
-                tv1.setText("상관에 대한 경례");
+                tv1.setText("경례");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
                 TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
                 tv2.setText("경례하세요");
                 iv.setImageResource(R.drawable.korean_flag);
-
-                mp_salute.start();
-
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mp_salute.stop();
                         dialog.dismiss();
                     }
                 });
