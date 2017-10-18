@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         auth.SetAuth(true);
-        auth.SetNick("Test");
-    }
+        auth.SetNick("TEST");
+}
 
     public void SignInClick(View v){
         EditText et_id = (EditText)findViewById(R.id.login_user_idText);
