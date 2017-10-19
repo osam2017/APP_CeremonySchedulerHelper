@@ -1,8 +1,10 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +46,22 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.action_delete_ceremony:
-                Toast.makeText(this, "행사 삭제 미구현", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("경고")
+                        .setMessage("삭제후 복구할수 없습니다.\n 정말로 삭제하시겠습니까?")
+                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //삭제버튼 클릭시 구현
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).show();
+
                 break;
         }
         return true;

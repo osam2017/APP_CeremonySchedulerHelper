@@ -4,7 +4,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -32,8 +34,16 @@ public class SharedListActivity extends AppCompatActivity {
         ArrayAdapter<String> simpleAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_sharedlist);
         listView.setAdapter(simpleAdapter3);
 
+        //시험용
         arrayList_ceremony_sharedlist.add("이사람");
         arrayList_ceremony_sharedlist.add("저사람");
 
+        Button btn_detail_page_order_add = (Button) findViewById(R.id.btn_add_shared);
+        btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //공유 인원 추가하기
+            }
+        });
     }
 }
