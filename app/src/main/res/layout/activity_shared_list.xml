@@ -16,6 +16,14 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <ProgressBar
+        android:id="@+id/progressBarLoad"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
     <ListView
         android:id="@+id/listview_shared_list"
         android:layout_width="match_parent"

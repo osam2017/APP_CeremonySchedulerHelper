@@ -3,6 +3,7 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import android.media.MediaPlayer;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
@@ -29,6 +43,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
+
+    private int m_iEid;
+    private String m_strName;
 
 
 
@@ -47,26 +64,12 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             }
             case R.id.action_move_to_share_list:
                 Intent intent = new Intent(this, SharedListActivity.class);
-                intent.putExtra("ceremony name",getIntent().getExtras().getString("ceremony_name"));
+                intent.putExtra("ceremony name", m_strName);
+                intent.putExtra("eid", m_iEid);
                 startActivity(intent);
                 break;
             case R.id.action_delete_ceremony:
-                new AlertDialog.Builder(this)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("경고")
-                        .setMessage("삭제후 복구할수 없습니다.\n정말로 삭제하시겠습니까?")
-                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //삭제버튼 클릭시 구현
-                            }
-                        })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
-
+                new DeleteScheduleByEid().execute();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -75,6 +78,10 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        m_strName = getIntent().getExtras().getString("ceremony_name");
+        m_iEid = getIntent().getExtras().getInt("eid");
+
         setContentView(R.layout.activity_ceremony_detail);
         mp_anthem = MediaPlayer.create(this,R.raw.anthem_1);
         mp_oath = MediaPlayer.create(this,R.raw.oath_to_flag);
@@ -283,7 +290,78 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
             }
         });
+    }
 
+    public class DeleteScheduleByEid extends AsyncTask<String, String, String> {
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            try {
+                URL url = new URL(GLOBALVAR.SCHEDULE_URL + "/" + m_iEid);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
+                con.setRequestMethod("DELETE");
+
+                int iSuccess = con.getResponseCode();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        protected void onPostExecute(String result) {
+            //delete relation
+            new DeleteRelationEid().execute();
+        }
+    }
+
+    public class DeleteRelationEid extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            try {
+                URL url = new URL(GLOBALVAR.RELATION_EID_URL + "/" + m_iEid);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
+                con.setRequestMethod("DELETE");
+
+                int iSuccess = con.getResponseCode();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        protected void onPostExecute(String result) {
+            //go back page and reload schedules
+            Intent intent = new Intent(getApplicationContext(), MainPageActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
