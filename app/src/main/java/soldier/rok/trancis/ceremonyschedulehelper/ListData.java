@@ -5,6 +5,7 @@ package soldier.rok.trancis.ceremonyschedulehelper;
 public class ListData {
     private String text_ceremony_date;
     private String text_ceremony_name;
+    private String text_ceremony_type;
     private String text_ceremony_sort;
     private String text_ceremony_detail;
 
@@ -65,6 +66,7 @@ public class ListData {
                 this.text_ceremony_detail = text_ceremony_detail;
         }
 
+
     }
 
     public String getText_ceremony_date() {
@@ -75,8 +77,8 @@ public class ListData {
         return text_ceremony_name;
     }
 
-    public String getText_ceremony_detail() {
-        return text_ceremony_detail;
+    public String getText_ceremony_type() {
+        return text_ceremony_type;
     }
 
     public String getText_ceremony_sort() {

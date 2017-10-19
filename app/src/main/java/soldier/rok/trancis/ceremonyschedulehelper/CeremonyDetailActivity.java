@@ -218,4 +218,5 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
 
     }
+
 }
