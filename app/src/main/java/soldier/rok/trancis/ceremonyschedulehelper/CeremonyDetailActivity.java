@@ -227,8 +227,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

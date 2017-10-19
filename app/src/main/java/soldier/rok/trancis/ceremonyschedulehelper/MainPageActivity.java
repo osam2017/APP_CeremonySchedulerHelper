@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.simple.JSONObject;
@@ -42,6 +43,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedtime = 0;
     String testStr1, testStr2, testStr3;
+    private ProgressBar spinner;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -70,6 +72,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        spinner = (ProgressBar)findViewById(R.id.progressBarLoad);
         //get schedules from server
         new GetEidByUid().execute();
 
@@ -196,6 +199,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 //when get all of the item
                 if(iItemCnt == iFinishItemCnt)
                 {
+                    spinner.setVisibility(View.GONE);
                     onResume();
                 }
             }
@@ -211,6 +215,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            spinner.setVisibility(View.VISIBLE);
         }
 
         @Override
