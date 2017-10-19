@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         m_Ctxt = this;
 
+        auth.SetAuth(true);
+        auth.SetNick("test123312");
+
         EditText login_user_idText = (EditText)findViewById(R.id.login_user_idText);
         EditText login_user_passwordText = (EditText)findViewById(R.id.login_user_passwordText);
         Button btn_main_sign_up = (Button)findViewById(R.id.btn_main_sign_up);

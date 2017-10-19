@@ -294,6 +294,15 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                         arrayList_ceremony_detail.add(et.getText().toString());
                         simpleAdapter2.notifyDataSetChanged();
                         dialog.dismiss();
+                        if (et.getText().toString().length()>0) {
+                            arrayList_ceremony_detail.add(et.getText().toString());
+                            simpleAdapter2.notifyDataSetChanged();
+                            //서버 전송필요
+                            dialog.dismiss();
+                        }
+                        else{
+                            Toast.makeText(CeremonyDetailActivity.this, "내용을 입력해주세요",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 btn2.setOnClickListener(new View.OnClickListener() {
@@ -316,7 +325,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                arrayList_ceremony_detail.remove(arrayList_ceremony_detail.size()-1);
+                              //arrayList_ceremony_detail.remove();
                                simpleAdapter2.notifyDataSetChanged();
+                               dialog.dismiss();
                            }
                        })
                        .setNegativeButton("취소", null)
