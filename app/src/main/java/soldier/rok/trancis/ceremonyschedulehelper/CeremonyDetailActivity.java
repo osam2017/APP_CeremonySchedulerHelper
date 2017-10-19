@@ -350,8 +350,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 // 서버저장 코드
             }
         });
-
     }
+
+
 
     public class DeleteScheduleByEid extends AsyncTask<String, String, String> {
 
@@ -431,6 +432,13 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         }
     }
 
+    public void gotoMain(){
+
+        Intent intent = new Intent(this, MainPageActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public class EditSchedule extends AsyncTask<String, String, String> {
 
         @Override
@@ -473,9 +481,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             //이전 화면의 데이터들을 최신화 해야한다.
             //
-            Intent intent = new Intent(getApplicationContext(), MainPageActivity.class);
-            startActivity(intent);
-            finish();
+            gotoMain();
         }
     }
 }

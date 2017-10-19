@@ -84,6 +84,7 @@ public class SharedListActivity extends AppCompatActivity {
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String test = et.getText().toString();
                         new GetUidByUser(et.getText().toString()).execute();
                         dialog.dismiss();
                   //공유 인원 추가 코드 넣을것
@@ -107,10 +108,6 @@ public class SharedListActivity extends AppCompatActivity {
         simpleAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_sharedlist);
         listView.setAdapter(simpleAdapter3);
 
-    }
-
-    public void alarmDataChanged(){
-        simpleAdapter3.notifyDataSetChanged();
     }
 
     @Override
@@ -168,7 +165,7 @@ public class SharedListActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-           alarmDataChanged();
+           onResume();
         }
     }
 
@@ -231,7 +228,6 @@ public class SharedListActivity extends AppCompatActivity {
                 String strNick = jsonObj.get("nickname").toString();
                 String strUid = jsonObj.get("uid").toString();
                 arrayList_ceremony_sharedlist.add(strNick);
-                arrayList_ceremony_sharedlist.notify();
                 new MakeRelation(Integer.parseInt(strUid)).execute();
             }
             catch(ParseException e)
