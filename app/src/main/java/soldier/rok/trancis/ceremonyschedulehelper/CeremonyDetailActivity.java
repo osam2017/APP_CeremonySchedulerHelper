@@ -277,6 +277,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         });
 
         Button btn_detail_page_order_add = (Button) findViewById(R.id.btn_detail_page_order_add);
+
         btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,6 +286,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 final EditText et = (EditText) dialog.findViewById(R.id.edittext_detail_page_order_ceremony_name);
                 Button btn1 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_add);
                 Button btn2 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_cancel);
+
 
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -328,6 +330,14 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                        .show();
             }
         });
+        Button btn_detail_page_order_save = (Button) findViewById(R.id.btn_detail_page_order_save);
+        btn_detail_page_order_save.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // 서버저장 코드
+            }
+        });
+
     }
 
     public class DeleteScheduleByEid extends AsyncTask<String, String, String> {
