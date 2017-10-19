@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,12 +16,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import android.media.MediaPlayer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CeremonyDetailActivity extends AppCompatActivity {
 
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
+    final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
 
 
     @Override
@@ -31,7 +34,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         mp_oath = MediaPlayer.create(this,R.raw.oath_to_flag);
         mp_salute = MediaPlayer.create(this,R.raw.salute_to_field_officer);
 
-        String ceremony_type = getIntent().getExtras().getString("ceremony_type");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
@@ -40,84 +43,12 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
-        final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
+
 
         ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
-        if (ceremony_type =="사열식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-
-        }
-        else if(ceremony_type =="표창수여식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-
-        }
-        else if(ceremony_type =="경축식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-
-        }
-        else if(ceremony_type =="이,취임식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-        }
-        else if(ceremony_type =="입대,임관,입교,수료식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("신고");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-        }
-        else if(ceremony_type =="전역식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("신고");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-        }
-        else if(ceremony_type =="취,퇴역식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("신고");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-        }
-        else if(ceremony_type =="영결식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("신고");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-        }
-        else if(ceremony_type =="하관식"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("신고");
-            arrayList_ceremony_detail.add("훈시");
-            arrayList_ceremony_detail.add("상관에 대한 경례");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-        }
-        else if(ceremony_type =="사용자 정의"){
-            arrayList_ceremony_detail.add("애국가 제창");
-            arrayList_ceremony_detail.add("국기에 대한 맹세");
-        }
-
+        ceremonySort();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -144,6 +75,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
             }
 
+
+
+            //각 버튼 종류별 팝업 종류
             public void showpopup_Anthem()
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
@@ -255,8 +189,12 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
 
 
+
+
         });
 
+
+        //디테일 페이지 돌아가기 버튼
         Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
         btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,16 +208,85 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
     }
 
+    protected void ceremonySort(){
+        String ceremony_type = getIntent().getExtras().getString("ceremony_type");
+        if (ceremony_type =="사열식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="표창수여식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="경축식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="이,취임식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+        }
+        else if(ceremony_type =="입대,임관,입교,수료식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("신고");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="전역식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("신고");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="취,퇴역식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("신고");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+        }
+        else if(ceremony_type =="영결식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("신고");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+        }
+        else if(ceremony_type =="하관식"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("신고");
+            arrayList_ceremony_detail.add("훈시");
+            arrayList_ceremony_detail.add("상관에 대한 경례");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+        }
+        else if(ceremony_type =="사용자 정의"){
+            arrayList_ceremony_detail.add("애국가 제창");
+            arrayList_ceremony_detail.add("국기에 대한 맹세");
+        }
+    }
 
+    //액티비티 destroy시 mediaplayer 릴리즈.
+    protected void onDestroy() {
+        mp_anthem.release();
+        mp_salute.release();
+        mp_oath.release();
+        super.onDestroy();
 
-
-
-/*
-    private static final int PLAYER_INIT = 0;
-    private static final int PLAYER_STOP = 1;
-    private static final int PLAYER_PLAY = 2;
-    private static final int PLAYER_PAUSE =3;
-    private MediaPlayer mediaplayer = null;
-    private int mediaPlayerStatus = PLAYER_INIT;
- */
+    }
 }

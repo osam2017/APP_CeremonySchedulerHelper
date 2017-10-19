@@ -147,7 +147,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
                 String strTitle = jsonObj.get("title").toString();
                 String strDate = jsonObj.get("date").toString();
-                listDataArray.add(1, new ListData(strTitle, strDate, "type"));
+                String strSort = jsonObj.get("sort").toString();
+                listDataArray.add(1, new ListData(strTitle, strDate, strSort));
                 onResume();
             }
             catch(ParseException e)
