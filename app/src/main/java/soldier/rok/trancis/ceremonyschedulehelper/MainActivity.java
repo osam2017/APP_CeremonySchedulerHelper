@@ -29,13 +29,15 @@ public class MainActivity extends AppCompatActivity {
         EditText login_user_passwordText = (EditText)findViewById(R.id.login_user_passwordText);
         Button btn_main_sign_up = (Button)findViewById(R.id.btn_main_sign_up);
 
-        //FIXME-fordebug
-        auth.SetAuth(true);
-        auth.SetUserId(1);
+       //FIXME-fordebug
+        /*auth.SetAuth(true);
+        auth.SetUserId(1);*/
         btn_main_sign_up.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startLogin();
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -71,14 +73,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(auth.getAuth() == true)
         {
-            startLogin();
+            Intent intent = new Intent(this, MainPageActivity.class);
+            startActivity(intent);
             finish();
         }
 
-    }
-
-    public void startLogin(){
-        Intent intent = new Intent(this, MainPageActivity.class);
-        startActivity(intent);
     }
 }

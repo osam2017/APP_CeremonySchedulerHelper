@@ -324,11 +324,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             //delete relation
-            new DeleteRelationEid().execute();
+            new DeleteRelationEidAndUid().execute();
         }
     }
 
-    public class DeleteRelationEid extends AsyncTask<String, String, String> {
+    public class DeleteRelationEidAndUid extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute() {
@@ -338,11 +338,16 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
             try {
-                URL url = new URL(GLOBALVAR.RELATION_EID_URL + "/" + m_iEid);
+                URL url = new URL(GLOBALVAR.RELATION_EID_URL);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
                 con.setRequestMethod("DELETE");
+                OutputStream os = con.getOutputStream();
+                String strData = "eid=" + m_iEid + "&uid=" + auth.getUserId();
+                os.write(strData.getBytes("UTF-8"));
+                os.flush();
+                os.close();
 
                 int iSuccess = con.getResponseCode();
             } catch (MalformedURLException e) {
