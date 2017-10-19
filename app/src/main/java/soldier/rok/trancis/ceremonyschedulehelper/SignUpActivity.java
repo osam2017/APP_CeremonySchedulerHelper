@@ -29,7 +29,25 @@ public class SignUpActivity extends AppCompatActivity {
         btn_sign_up.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                onSignUp(v);
+
+                //미입력 검출
+                if(et_id.length()>0){
+                    if(et_password.length()>0){
+                        if(et_nickname.length()>0){
+                            onSignUp(v);
+                        }
+                        else{
+                            Toast.makeText(getBaseContext(), "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(getBaseContext(), "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "ID를 입력하세요", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

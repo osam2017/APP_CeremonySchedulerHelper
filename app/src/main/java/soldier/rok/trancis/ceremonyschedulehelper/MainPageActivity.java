@@ -63,7 +63,6 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         return true;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +109,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         long intervalTime = tempTIme - backPressedtime;
 
         if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
-            super.onBackPressed();
+            System.exit(0);
         }
         else{
             backPressedtime = tempTIme;

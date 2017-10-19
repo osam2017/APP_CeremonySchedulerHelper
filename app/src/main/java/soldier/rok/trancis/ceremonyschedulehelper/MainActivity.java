@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -48,10 +49,22 @@ public class MainActivity extends AppCompatActivity {
         sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
 
-        
+        //미입력 검출
+        if(sId.length()>0)
+        {
+            if(sPw.length()>0){
+                new SignIn(sId, sPw).execute(GLOBALVAR.SIGNIN_URL);
+            }
+            else{
+                Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+            }
 
+        }
+        else
+        {
+            Toast.makeText(this, "ID를 입력하세요", Toast.LENGTH_SHORT).show();
+        }
 
-        new SignIn(sId, sPw).execute(GLOBALVAR.SIGNIN_URL);
     }
 
     @Override
