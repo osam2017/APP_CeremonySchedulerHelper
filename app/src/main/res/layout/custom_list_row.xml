@@ -45,7 +45,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/custom_row_textView_ceremony_detail"
+                android:id="@+id/custom_row_textView_ceremony_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

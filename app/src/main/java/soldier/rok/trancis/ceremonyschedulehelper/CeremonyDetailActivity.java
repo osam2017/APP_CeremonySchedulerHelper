@@ -33,7 +33,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
-        String strSort = getIntent().getExtras().getString("ceremony_sort");
+        String strDetail = getIntent().getExtras().getString("ceremony_detail");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -45,67 +45,12 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
-        switch(strSort)
+        //divide detail by \n and add elements into arrayList_ceremony_detail
+        String[] strDiv = strDetail.split("\n");
+        for(int i=0; i<strDiv.length; i++)
         {
-            case "사열식":
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                break;
-            case "표창수여식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                break;
-            case "경축식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "이,취임식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("신고");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "입대,임관,입교,수료식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "전역식":
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("신고");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                break;
-            case "취,퇴역식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("신고");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("상관에 대한 경례");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "영결식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("신고");
-                arrayList_ceremony_detail.add("훈시");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "하관식":
-                arrayList_ceremony_detail.add("애국가 제창");
-                arrayList_ceremony_detail.add("국기에 대한 맹세");
-                break;
-            case "커스텀":
-
+            arrayList_ceremony_detail.add(strDiv[i]);
         }
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

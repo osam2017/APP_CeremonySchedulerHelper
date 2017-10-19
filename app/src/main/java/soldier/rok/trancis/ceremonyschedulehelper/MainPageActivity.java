@@ -35,6 +35,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
     private ArrayList<ListData> listDataArray = new ArrayList<ListData>();
     public static Context m_Ctxt;
+    int iItemCnt = 0;
+    int iFinishItemCnt = 0;
     String testStr1, testStr2, testStr3;
 
     @Override
@@ -45,9 +47,6 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         //get schedules from server
         new GetEidByUid().execute();
 
-
-        ListData data1 = new ListData("a", "b", "C");
-        listDataArray.add(data1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick()+"의 행사 내역");
@@ -88,6 +87,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
         Intent intent_list_click = new Intent(getBaseContext(), CeremonyDetailActivity.class);
         intent_list_click.putExtra("ceremony_name", listDataArray.get(position).getText_ceremony_name());
+        intent_list_click.putExtra("ceremony_detail", listDataArray.get(position).getText_ceremony_detail());
         startActivity(intent_list_click);
     }
 
@@ -114,8 +114,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
                 int responseCode;
 
-                con.setConnectTimeout(1500);
-                con.setReadTimeout(1500);
+                con.setConnectTimeout(1000);
+                con.setReadTimeout(1000);
 
                 responseCode = con.getResponseCode();
                 if (responseCode == 200) {
@@ -146,8 +146,14 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
                 String strTitle = jsonObj.get("title").toString();
                 String strDate = jsonObj.get("date").toString();
-                listDataArray.add(1, new ListData(strTitle, strDate, "C"));
-                onResume();
+                String strSort = jsonObj.get("sort").toString();
+                listDataArray.add(0, new ListData(strDate, strTitle, strSort, strSort));
+                iFinishItemCnt++;
+                //when get all of the item
+                if(iItemCnt == iFinishItemCnt)
+                {
+                    onResume();
+                }
             }
             catch(ParseException e)
             {
@@ -173,8 +179,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
                 int responseCode;
 
-                con.setConnectTimeout(1500);
-                con.setReadTimeout(1500);
+                con.setConnectTimeout(1000);
+                con.setReadTimeout(1000);
 
                 responseCode = con.getResponseCode();
                 if (responseCode == 200) {
@@ -213,6 +219,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                         iaEids[iIndex] = Integer.parseInt(strNum);
                         new GetScheduleByEId(iaEids[iIndex]).execute();
                         iIndex++;
+                        iItemCnt++;
                     }
                 }
             }
