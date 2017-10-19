@@ -41,7 +41,7 @@ public class CustomAdapter extends ArrayAdapter<ListData> {
         //get으로 순서값 참조 후 setText
         tvText_ceremony_date.setText(listData.get(position).getText_ceremony_date());
         tvText_ceremony_name.setText(listData.get(position).getText_ceremony_name());
-        tvText_ceremony_detail.setText(listData.get(position).getText_ceremony_detail());
+        tvText_ceremony_detail.setText(listData.get(position).getText_ceremony_type());
 
 
         return row;

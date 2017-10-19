@@ -195,7 +195,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
         }); btn_rg_10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_strCeremonyType = "커스텀";
+                m_strCeremonyType = "사용자 정의";
             }
         });
     }

@@ -88,6 +88,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
         Intent intent_list_click = new Intent(getBaseContext(), CeremonyDetailActivity.class);
         intent_list_click.putExtra("ceremony_name", listDataArray.get(position).getText_ceremony_name());
+        intent_list_click.putExtra("ceremony_type", listDataArray.get(position).getText_ceremony_type());
         startActivity(intent_list_click);
     }
 
@@ -146,7 +147,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
                 String strTitle = jsonObj.get("title").toString();
                 String strDate = jsonObj.get("date").toString();
-                listDataArray.add(1, new ListData(strTitle, strDate, "C"));
+                listDataArray.add(1, new ListData(strTitle, strDate, "type"));
                 onResume();
             }
             catch(ParseException e)
