@@ -13,7 +13,7 @@ public class ListData {
         this.text_ceremony_date = text_date;
         this.text_ceremony_name = text1;
         this.text_ceremony_sort = text_sort;
-        this.text_ceremony_detail = "";
+        this.text_ceremony_detail = "*";
 
         switch(text_sort)
         {

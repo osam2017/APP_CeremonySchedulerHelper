@@ -133,8 +133,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
         btn_add_page_cancel.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
