@@ -231,6 +231,7 @@ public class SharedListActivity extends AppCompatActivity {
                 String strNick = jsonObj.get("nickname").toString();
                 String strUid = jsonObj.get("uid").toString();
                 arrayList_ceremony_sharedlist.add(strNick);
+                arrayList_ceremony_sharedlist.notify();
                 new MakeRelation(Integer.parseInt(strUid)).execute();
             }
             catch(ParseException e)
