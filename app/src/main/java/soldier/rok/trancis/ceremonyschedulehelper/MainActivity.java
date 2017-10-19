@@ -47,7 +47,23 @@ public class MainActivity extends AppCompatActivity {
         EditText et_pw = (EditText)findViewById(R.id.login_user_passwordText);
         sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
-        new SignIn(sId, sPw).execute(GLOBALVAR.SIGNIN_URL);
+
+        //미입력 검출
+        if(sId.length()>0)
+        {
+            if(sPw.length()>0){
+                new SignIn(sId, sPw).execute(GLOBALVAR.SIGNIN_URL);
+            }
+            else{
+                Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else
+        {
+            Toast.makeText(this, "ID를 입력하세요", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -55,12 +71,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(auth.getAuth() == true)
         {
-            startLogin();
+            Intent intent = new Intent(this, MainPageActivity.class);
+            startActivity(intent);
             finish();
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(), "Wrong Id or Password", Toast.LENGTH_SHORT).show();
         }
 
     }
