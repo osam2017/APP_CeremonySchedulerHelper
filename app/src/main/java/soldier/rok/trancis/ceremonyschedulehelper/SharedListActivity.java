@@ -34,6 +34,8 @@ import java.util.ArrayList;
 import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class SharedListActivity extends AppCompatActivity {
+    int m_iEid;
+    String m_strName;
 
     ArrayList<String> arrayList_ceremony_sharedlist;
     int iItemCnt = 0;
@@ -55,6 +57,8 @@ public class SharedListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shared_list);
 
+        m_iEid = getIntent().getExtras().getInt("eid");
+        m_strName = getIntent().getExtras().getString("ceremony name");
         arrayList_ceremony_sharedlist = new ArrayList<String>();
         spinner = (ProgressBar)findViewById(R.id.progressBarLoad);
 
@@ -86,6 +90,59 @@ public class SharedListActivity extends AppCompatActivity {
         ArrayAdapter<String> simpleAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_sharedlist);
         listView.setAdapter(simpleAdapter3);
     }
+
+
+    public class MakeRelation extends AsyncTask<String, String, String> {
+        int m_iUid;
+
+        public MakeRelation(int iUid){
+            m_iUid = iUid;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            try {
+                URL url = new URL(GLOBALVAR.RELATION_URL);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+
+                OutputStream os = con.getOutputStream();
+                String strData = "eid=" + m_iEid + "&uid=" + m_iUid;
+                os.write(strData.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                } else {
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        protected void onPostExecute(String result) {
+           ;
+        }
+    }
+
+
+
 
     public class GetUserByUid extends AsyncTask<String, String, String> {
         int m_iUid;
@@ -173,7 +230,7 @@ public class SharedListActivity extends AppCompatActivity {
             BufferedInputStream bis = null;
             StringBuilder sb = new StringBuilder();
             try {
-                URL url = new URL(GLOBALVAR.RELATION_EID_URL+ "/" + getIntent().getExtras().get("eid"));
+                URL url = new URL(GLOBALVAR.RELATION_EID_URL+ "/" + m_iEid);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 int responseCode;
