@@ -130,6 +130,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         intent_list_click.putExtra("ceremony_name", listDataArray.get(position).getText_ceremony_name());
         intent_list_click.putExtra("ceremony_detail", listDataArray.get(position).getText_ceremony_detail());
         intent_list_click.putExtra("ceremony_sort", listDataArray.get(position).getText_ceremony_sort());
+        intent_list_click.putExtra("eid", listDataArray.get(position).getEID());
+
         startActivity(intent_list_click);
     }
 
@@ -190,8 +192,9 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 String strDate = jsonObj.get("date").toString();
                 String strSort = jsonObj.get("sort").toString();
 
+                String strEid = jsonObj.get("eid").toString();
                 String strDetail = jsonObj.get("detail").toString();
-                listDataArray.add(0, new ListData(strDate, strTitle, strSort, strDetail));
+                listDataArray.add(0, new ListData(strDate, strTitle, strSort, strDetail, Integer.parseInt(strEid)));
                 iFinishItemCnt++;
                 //when get all of the item
                 if(iItemCnt == iFinishItemCnt)

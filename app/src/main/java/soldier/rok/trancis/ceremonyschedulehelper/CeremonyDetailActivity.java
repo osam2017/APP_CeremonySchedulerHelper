@@ -41,6 +41,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             case R.id.action_move_to_share_list:
                 Intent intent = new Intent(this, SharedListActivity.class);
                 intent.putExtra("ceremony name",getIntent().getExtras().getString("ceremony_name"));
+                intent.putExtra("eid", getIntent().getExtras().getInt("eid"));
                 startActivity(intent);
                 break;
             case R.id.action_delete_ceremony:
