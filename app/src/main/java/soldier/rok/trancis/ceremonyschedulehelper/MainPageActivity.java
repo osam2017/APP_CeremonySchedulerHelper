@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -40,6 +42,27 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedtime = 0;
     String testStr1, testStr2, testStr3;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.toobar_menu_right, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item){
+        //각각의 버튼을 클릭할때의 수행할것을 정의해 준다.
+        switch (item.getItemId()){
+            case R.id.action_setting:
+                Toast.makeText(this, "설정 미구현", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_sign_out:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

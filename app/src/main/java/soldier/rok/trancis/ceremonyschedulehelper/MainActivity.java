@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         EditText et_pw = (EditText)findViewById(R.id.login_user_passwordText);
         sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
+
+        
+
+
         new SignIn(sId, sPw).execute(GLOBALVAR.SIGNIN_URL);
     }
 
