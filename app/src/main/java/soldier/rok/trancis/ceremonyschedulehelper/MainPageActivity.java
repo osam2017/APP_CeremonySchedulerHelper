@@ -56,8 +56,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 Toast.makeText(this, "설정 미구현", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_sign_out:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 break;
         }
         return true;

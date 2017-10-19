@@ -44,6 +44,7 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 public class CeremonyAddActivity extends AppCompatActivity {
     private String TAG = "PickerActivity";
     private String m_strCeremonyType;
+    private String m_strCeremonyName;
     Context m_Ctxt = this;
 
     @Override
@@ -111,12 +112,12 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 //not selected
                 if(m_strCeremonyType == null)
                 {
-                    Toast.makeText(getApplicationContext(), "Please Check Ceremony", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "행사 종류를 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
                 //check ceremonyname
-                else if(((EditText) findViewById(R.id.text_input_ceremony_name)).getText().equals(""))
+                else if(((EditText) findViewById(R.id.text_input_ceremony_name)).getText().length()==0)
                 {
-                    Toast.makeText(getApplicationContext(), "Please Write Down Ceremony Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "행사명을 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
