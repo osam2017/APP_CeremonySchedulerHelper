@@ -48,7 +48,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private String m_strName;
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar_menu_detailpage, menu);
@@ -98,7 +97,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
         final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
-        ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
+        final ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
         if(strDetail.compareTo("*") == 0)
@@ -283,14 +282,17 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
                 dialog.setContentView(R.layout.custom_dialog_ceremony_detail_custom);
-                EditText et = (EditText) dialog.findViewById(R.id.edittext_detail_page_order_ceremony_name);
+                final EditText et = (EditText) dialog.findViewById(R.id.edittext_detail_page_order_ceremony_name);
                 Button btn1 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_add);
                 Button btn2 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_cancel);
 
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //식순추가 확인시 코드
+                        arrayList_ceremony_detail.add(et.getText().toString());
+                        simpleAdapter2.notifyDataSetChanged();
+                        //서버 전송필요
+                        dialog.dismiss();
                     }
                 });
                 btn2.setOnClickListener(new View.OnClickListener() {
@@ -312,7 +314,8 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                               //삭제코드
+                              arrayList_ceremony_detail.remove();
+                               simpleAdapter2.notifyDataSetChanged();
                            }
                        })
                        .setNegativeButton("취소", null)
