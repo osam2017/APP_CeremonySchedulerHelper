@@ -281,13 +281,42 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //식순추가용 detail내용 편집?
+                final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
+                dialog.setContentView(R.layout.custom_dialog_ceremony_detail_custom);
+                EditText et = (EditText) dialog.findViewById(R.id.edittext_detail_page_order_ceremony_name);
+                Button btn1 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_add);
+                Button btn2 = (Button) dialog.findViewById(R.id.btn_detail_page_order_ceremony_cancel);
+
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //식순추가 확인시 코드
+                    }
+                });
+                btn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         Button btn_detail_page_order_delete = (Button) findViewById(R.id.btn_detail_page_order_delete);
         btn_detail_page_order_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               new AlertDialog.Builder(CeremonyDetailActivity.this)
+                       .setTitle("경고")
+                       .setMessage("정말로 삭제하시겠습니까?")
+                       .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               //삭제코드
+                           }
+                       })
+                       .setNegativeButton("취소", null)
+                       .show();
             }
         });
     }
