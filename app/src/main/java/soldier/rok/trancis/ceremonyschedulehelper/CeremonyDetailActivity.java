@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
+    String mText_ceremony_type;
 
 
     @Override
@@ -33,6 +35,8 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
+
+
         String strDetail = getIntent().getExtras().getString("ceremony_detail");
         String strSort = getIntent().getExtras().getString("ceremony_sort");
         setSupportActionBar(toolbar);
@@ -68,27 +72,28 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             @Override
             //리스트뷰 아이템 클릭 리스너
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
+                mText_ceremony_type = arrayList_ceremony_detail.get(position).toString();
+                Log.i(getClass().getName(),"식순명 추출");
+                Log.i(getClass().getName(),mText_ceremony_type);
+                popup_select();
+                Log.i(getClass().getName(),"식순명에 따른 팝업함수 호출");
 
-                if(mText_ceremony_detail == "애국가 제창"){
-                    showpopup_Anthem();
-                }
-                else if(mText_ceremony_detail == "국기에 대한 맹세"){
-                    showpopup_Oath();
-                }
-                else if(mText_ceremony_detail == "상관에 대한 경례"){
-                    showpopup_Salute();
-                }
-                else if(mText_ceremony_detail == "신고"){
-                    showpopup_Report();
-                }
-                else if(mText_ceremony_detail == "훈시"){
-                    showpopup_Speech();
-                }
-                else if(mText_ceremony_detail == "+"){
-                    showpopup_Edit();
-                }
+            }
 
+            public void popup_select(){
+                switch (mText_ceremony_type){
+                    case "애국가 제창" : {
+                        showpopup_Anthem();
+                    }
+                    case "상관에 대한 경례":{
+                    }
+                    case "":{
+                    }
+                    case "경례":{
+                    }
+                    case "경례":{
+                    }
+                }
             }
 
             public void showpopup_Anthem()
