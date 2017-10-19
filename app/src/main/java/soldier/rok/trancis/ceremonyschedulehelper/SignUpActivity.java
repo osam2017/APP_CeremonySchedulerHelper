@@ -35,6 +35,9 @@ public class SignUpActivity extends AppCompatActivity {
                     if(et_password.length()>0){
                         if(et_nickname.length()>0){
                             new SignUp(et_id.getText().toString(), et_password.getText().toString(), et_nickname.getText().toString()).execute(GLOBALVAR.SIGNUP_URL);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                         else{
                             Toast.makeText(getBaseContext(), "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
@@ -53,10 +56,5 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    public void onSignUp(View v){
-        new SignUp(et_id.getText().toString(), et_password.getText().toString(), et_nickname.getText().toString()).execute(GLOBALVAR.SIGNUP_URL);
-        Intent intent = new Intent(this, MainActivity.class);
-        finish();
-    }
 
 }

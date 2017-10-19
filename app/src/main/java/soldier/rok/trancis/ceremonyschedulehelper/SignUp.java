@@ -60,6 +60,5 @@ public class SignUp extends AsyncTask<String, String, String> {
     }
 
     protected void onPostExecute(String result) {
-        new SignIn(m_strId, m_strPassword).execute();
     }
 }
