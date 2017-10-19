@@ -64,28 +64,28 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
 
+            @Override
             //리스트뷰 아이템 클릭 리스너
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String mText_ceremony_type = arrayList_ceremony_detail.get(position).toString();
+                String mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
 
-                if(mText_ceremony_type == "애국가 제창"){
+                if(mText_ceremony_detail == "애국가 제창"){
                     showpopup_Anthem();
                 }
-                else if(mText_ceremony_type == "국기에 대한 맹세"){
+                else if(mText_ceremony_detail == "국기에 대한 맹세"){
                     showpopup_Oath();
                 }
-                else if(mText_ceremony_type == "상관에 대한 경례"){
+                else if(mText_ceremony_detail == "상관에 대한 경례"){
                     showpopup_Salute();
                 }
-                else if(mText_ceremony_type == "신고"){
+                else if(mText_ceremony_detail == "신고"){
                     showpopup_Report();
                 }
-                else if(mText_ceremony_type == "훈시"){
+                else if(mText_ceremony_detail == "훈시"){
                     showpopup_Speech();
                 }
-                else if(mText_ceremony_type == "+"){
+                else if(mText_ceremony_detail == "+"){
                     showpopup_Edit();
                 }
 
@@ -201,6 +201,20 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void showpopup_Edit()
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
+                dialog.setContentView( R.layout.custom_dialog);
+                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                tv1.setText("에디트(EditText필)");
+                ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
+                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                tv2.setText("에디트1");
+                iv.setImageResource(R.drawable.korean_flag);
+                Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
                 dialog.show();
             }
 
