@@ -38,6 +38,7 @@ public class SharedListActivity extends AppCompatActivity {
     String m_strName;
 
     ArrayList<String> arrayList_ceremony_sharedlist;
+    ArrayAdapter<String> simpleAdapter3;
     int iItemCnt = 0;
     int iFinishCnt = 0;
     private ProgressBar spinner;
@@ -64,7 +65,7 @@ public class SharedListActivity extends AppCompatActivity {
 
         //툴바 기능
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_sharedList);
-        toolbar.setTitle(getIntent().getExtras().getString("ceremony_name")+"를 공유된 사람");
+        toolbar.setTitle(m_strName +"를 공유한 사람");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -76,13 +77,15 @@ public class SharedListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(SharedListActivity.this);
                 dialog.setContentView(R.layout.custom_dialog_add_shared);
-                EditText et = (EditText) dialog.findViewById(R.id.editText_custom_dialog_add_shared_nickname);
+                final EditText et = (EditText) dialog.findViewById(R.id.editText_custom_dialog_add_shared_nickname);
                 Button btn1 = (Button) dialog.findViewById(R.id.btn_custom_dialog_add_shared_confirm);
                 Button btn2 = (Button) dialog.findViewById(R.id.btn_custom_dialog_add_shared_cancel);
 
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        new GetUidByUser(et.getText().toString()).execute();
+                        dialog.dismiss();
                   //공유 인원 추가 코드 넣을것
                     }
                 });
@@ -101,9 +104,13 @@ public class SharedListActivity extends AppCompatActivity {
         new GetUidByEid().execute();
 
         ListView listView = (ListView)findViewById(R.id.listview_shared_list);
-        ArrayAdapter<String> simpleAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_sharedlist);
+        simpleAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_sharedlist);
         listView.setAdapter(simpleAdapter3);
 
+    }
+
+    public void alarmDataChanged(){
+        simpleAdapter3.notifyDataSetChanged();
     }
 
     @Override
@@ -161,12 +168,77 @@ public class SharedListActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-           ;
+           alarmDataChanged();
         }
     }
 
 
 
+
+    public class GetUidByUser extends AsyncTask<String, String, String> {
+        String m_strUser;
+        public GetUidByUser(String strUser)
+        {
+            m_strUser = strUser;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            BufferedInputStream bis = null;
+            StringBuilder sb = new StringBuilder();
+            try {
+                URL url = new URL(GLOBALVAR.USER_IDNAME_URL + "/" + m_strUser);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                int responseCode;
+
+                con.setConnectTimeout(1500);
+                con.setReadTimeout(1500);
+
+                responseCode = con.getResponseCode();
+                if (responseCode == 200) {
+                    bis = new BufferedInputStream(con.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(bis, "UTF-8"));
+
+                    String line = null;
+                    while ((line = reader.readLine()) != null)
+                        sb.append(line);
+                    bis.close();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return sb.toString();
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+            //show 등록중입니다 프로세스
+        }
+
+        protected void onPostExecute(String result) {
+            try{
+                JSONParser jsonParser = new JSONParser();
+                JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
+                String strNick = jsonObj.get("nickname").toString();
+                String strUid = jsonObj.get("uid").toString();
+                arrayList_ceremony_sharedlist.add(strNick);
+                new MakeRelation(Integer.parseInt(strUid)).execute();
+            }
+            catch(ParseException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public class GetUserByUid extends AsyncTask<String, String, String> {
         int m_iUid;
@@ -231,6 +303,7 @@ public class SharedListActivity extends AppCompatActivity {
                     spinner.setVisibility(View.GONE);
                     onResume();
                 }
+
             }
             catch(ParseException e)
             {
@@ -246,7 +319,6 @@ public class SharedListActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            spinner.setVisibility(View.VISIBLE);
         }
 
         @Override

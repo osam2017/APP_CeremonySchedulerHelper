@@ -281,6 +281,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

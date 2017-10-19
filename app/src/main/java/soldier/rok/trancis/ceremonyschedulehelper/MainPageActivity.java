@@ -33,7 +33,7 @@ import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class MainPageActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private ArrayList<ListData> listDataArray = new ArrayList<ListData>();
+    private ArrayList<ListData> listDataArray;
     public static Context m_Ctxt;
     int iItemCnt = 0;
     int iFinishItemCnt = 0;
@@ -69,6 +69,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        listDataArray = new ArrayList<ListData>();
         spinner = (ProgressBar)findViewById(R.id.progressBarLoad);
         //get schedules from server
         new GetEidByUid().execute();

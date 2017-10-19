@@ -69,6 +69,8 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 break;
             case R.id.action_delete_ceremony:
                 new DeleteScheduleByEid().execute();
+                //Intent intent2 = new Intent(this, MainPageActivity.class);
+                //startActivity(intent2);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -109,12 +111,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         {
             if(strDiv[i] != "")
                 arrayList_ceremony_detail.add(strDiv[i]);
-        }
-
-        //add + button when custom
-        if(strSort.compareTo("커스텀") == 0)
-        {
-            arrayList_ceremony_detail.add("+");
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -293,9 +289,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if(et.getText().toString().compareTo("") == 0)
                             return;
-                        arrayList_ceremony_detail.add(et.getText().toString());
-                        simpleAdapter2.notifyDataSetChanged();
-                        dialog.dismiss();
                         if (et.getText().toString().length()>0) {
                             arrayList_ceremony_detail.add(et.getText().toString());
                             simpleAdapter2.notifyDataSetChanged();
@@ -369,7 +362,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return "";
         }
 
         protected void onProgressUpdate(String... progress) {
@@ -392,7 +385,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... args) {
             try {
-                URL url = new URL(GLOBALVAR.RELATION_EID_URL);
+                URL url = new URL(GLOBALVAR.RELATION_URL);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
