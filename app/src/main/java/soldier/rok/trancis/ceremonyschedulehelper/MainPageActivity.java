@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +23,7 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,7 +44,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.toobar_menu_right, menu);
+        getMenuInflater().inflate(R.menu.toobar_menu_mainpage, menu);
         return true;
     }
 
@@ -81,7 +78,7 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         listView.setAdapter(customAdapter);
         listView.setOnItemClickListener(this);
 
-
+        //툴바 기능
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick()+"의 행사 내역");
         setSupportActionBar(toolbar);

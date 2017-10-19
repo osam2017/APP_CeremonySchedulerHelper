@@ -110,15 +110,17 @@ public class CeremonyAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //not selected
-                if(m_strCeremonyType == null)
-                {
-                    Toast.makeText(getApplicationContext(), "행사 종류를 선택해주세요", Toast.LENGTH_SHORT).show();
-                }
                 //check ceremonyname
-                else if(((EditText) findViewById(R.id.text_input_ceremony_name)).getText().length()==0)
+                if(((EditText) findViewById(R.id.text_input_ceremony_name)).getText().length()==0)
                 {
                     Toast.makeText(getApplicationContext(), "행사명을 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
+
+                else if(m_strCeremonyType == null)
+                {
+                    Toast.makeText(getApplicationContext(), "행사 종류를 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
+
                 else
                 {
                     String strDate = ((TextView) findViewById(R.id.text_disp_ceremony_date)).getText().toString();

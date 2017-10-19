@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <!-- 액션버튼  -->
+
+    <item android:id="@+id/action_move_to_share_list"
+        android:title="공유된 사람"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_delete_ceremony"
+        android:title="행사 삭제"
+        app:showAsAction="never" />
+</menu>

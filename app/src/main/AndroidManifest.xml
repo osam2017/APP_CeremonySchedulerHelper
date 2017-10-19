@@ -32,7 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CeremonyDetailActivity"></activity>
+        <activity android:name=".CeremonyDetailActivity" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/title_activity_setting" />
+        <activity android:name=".SharedListActivity"></activity>
     </application>
 
 </manifest>

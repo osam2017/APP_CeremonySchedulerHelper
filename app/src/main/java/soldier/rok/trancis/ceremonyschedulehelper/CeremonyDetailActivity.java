@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import android.media.MediaPlayer;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static soldier.rok.trancis.ceremonyschedulehelper.MainActivity.auth;
 
 public class CeremonyDetailActivity extends AppCompatActivity {
 
@@ -23,6 +28,27 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.toolbar_menu_detailpage, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item){
+        //각각의 버튼을 클릭할때의 수행할것을 정의해 준다.
+        switch (item.getItemId()){
+            case R.id.action_move_to_share_list:
+                Intent intent = new Intent(this, SharedListActivity.class);
+                intent.putExtra("ceremony name",getIntent().getExtras().getString("ceremony_name"));
+                startActivity(intent);
+                break;
+            case R.id.action_delete_ceremony:
+                Toast.makeText(this, "행사 삭제 미구현", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +68,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
         final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
-
-
         ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
