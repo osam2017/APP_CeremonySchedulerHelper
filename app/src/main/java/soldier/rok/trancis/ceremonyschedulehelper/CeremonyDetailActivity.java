@@ -34,6 +34,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
         String strDetail = getIntent().getExtras().getString("ceremony_detail");
+        String strSort = getIntent().getExtras().getString("ceremony_sort");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -45,11 +46,21 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
+        if(strDetail.compareTo("*") == 0)
+            strDetail = "";
+
         //divide detail by \n and add elements into arrayList_ceremony_detail
         String[] strDiv = strDetail.split("\n");
         for(int i=0; i<strDiv.length; i++)
         {
-            arrayList_ceremony_detail.add(strDiv[i]);
+            if(strDiv[i] != "")
+                arrayList_ceremony_detail.add(strDiv[i]);
+        }
+
+        //add + button when custom
+        if(strSort.compareTo("커스텀") == 0)
+        {
+            arrayList_ceremony_detail.add("+");
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,6 +84,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 }
                 else if(mText_ceremony_type == "훈시"){
                     showpopup_Speech();
+                }
+                else if(mText_ceremony_type == "+"){
+                    showpopup_Edit();
                 }
 
             }
@@ -184,7 +198,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 });
                 dialog.show();
             }
-
+            public void showpopup_Edit()
+            {
+                final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
+                dialog.show();
+            }
 
         });
 
