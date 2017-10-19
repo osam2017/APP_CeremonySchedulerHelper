@@ -8,9 +8,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,7 +21,9 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -69,10 +73,10 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         super.onResume();
 
 
-        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
-        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
-        listView.setAdapter(customAdapter);
-        listView.setOnItemClickListener(this);
+       final ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+       final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+       listView.setAdapter(customAdapter);
+       listView.setOnItemClickListener(this);
     }
 
     @Override

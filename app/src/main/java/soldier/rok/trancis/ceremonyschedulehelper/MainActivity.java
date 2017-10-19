@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         m_Ctxt = this;
 
-        auth.SetAuth(true);
-        auth.SetUserId(1);
+
         onResume();
 
         EditText login_user_idText = (EditText)findViewById(R.id.login_user_idText);
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        auth.SetAuth(true);
-        auth.SetNick("TestNick");
 
 }
 
