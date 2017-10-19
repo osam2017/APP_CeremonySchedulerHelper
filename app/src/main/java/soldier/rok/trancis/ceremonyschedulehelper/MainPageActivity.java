@@ -246,6 +246,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return sb.toString();
         }
@@ -257,19 +259,27 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
         protected void onPostExecute(String result) {
             try{
-                String[] strArr = result.split(",");
-                //get eids
-                int[] iaEids = new int[strArr.length/4];
-                int iIndex =0;
-                for(int i=0; i<strArr.length; i++)
+                if(result.compareTo("[]") == 0)
                 {
-                    if(strArr[i].contains("eid"))
+                    spinner.setVisibility(View.GONE);
+                    onResume();
+                }
+                else
+                {
+                    String[] strArr = result.split(",");
+                    //get eids
+                    int[] iaEids = new int[strArr.length/4];
+                    int iIndex =0;
+                    for(int i=0; i<strArr.length; i++)
                     {
-                        String strNum = strArr[i].replaceAll("\\D", "");
-                        iaEids[iIndex] = Integer.parseInt(strNum);
-                        new GetScheduleByEId(iaEids[iIndex]).execute();
-                        iIndex++;
-                        iItemCnt++;
+                        if(strArr[i].contains("eid"))
+                        {
+                            String strNum = strArr[i].replaceAll("\\D", "");
+                            iaEids[iIndex] = Integer.parseInt(strNum);
+                            new GetScheduleByEId(iaEids[iIndex]).execute();
+                            iIndex++;
+                            iItemCnt++;
+                        }
                     }
                 }
             }

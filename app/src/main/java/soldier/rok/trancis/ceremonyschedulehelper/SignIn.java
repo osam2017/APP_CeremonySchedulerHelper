@@ -38,7 +38,7 @@ public class SignIn extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... args) {
         try {
-            URL url = new URL(args[0]);
+            URL url = new URL(GLOBALVAR.SIGNIN_URL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
             con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
