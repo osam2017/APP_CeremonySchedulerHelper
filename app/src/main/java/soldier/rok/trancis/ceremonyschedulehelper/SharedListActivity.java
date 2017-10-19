@@ -71,7 +71,31 @@ public class SharedListActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Button btn_detail_page_order_add = (Button) findViewById(R.id.btn_add_shared);
-        
+        btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(SharedListActivity.this);
+                dialog.setContentView(R.layout.custom_dialog);
+                EditText et = (EditText)findViewById(R.id.editText_custom_dialog_add_shared_nickname);
+                Button btn1 = (Button)findViewById(R.id.btn_custom_dialog_add_shared_confirm);
+                Button btn2 = (Button)findViewById(R.id.btn_custom_dialog_add_shared_cancel);
+
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                btn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
 
         //search user name by user id by eid
         new GetUidByEid().execute();
