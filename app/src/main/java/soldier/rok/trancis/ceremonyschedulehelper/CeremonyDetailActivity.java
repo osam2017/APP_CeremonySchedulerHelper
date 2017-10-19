@@ -6,9 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,13 +22,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
-    String mText_ceremony_detail;
-
-
-    ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
-    final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
-    ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
-
 
 
     @Override
@@ -44,23 +34,24 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
+        String strDetail = getIntent().getExtras().getString("ceremony_detail");
+        String strSort = getIntent().getExtras().getString("ceremony_sort");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
+        final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
 
 
-        String strDetail = getIntent().getExtras().getString("ceremony_detail");
-        String strSort = getIntent().getExtras().getString("ceremony_sort");
-
-
+        ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
         if(strDetail.compareTo("*") == 0)
             strDetail = "";
 
         //divide detail by \n and add elements into arrayList_ceremony_detail
-        final String[] strDiv = strDetail.split("\n");
+        String[] strDiv = strDetail.split("\n");
         for(int i=0; i<strDiv.length; i++)
         {
             if(strDiv[i] != "")
@@ -73,31 +64,14 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             arrayList_ceremony_detail.add("+");
         }
 
-        onResume();
-
-        Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
-        btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-
-    }
-
-    @Override public void onResume()
-    {
-        super.onResume();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
+
             //리스트뷰 아이템 클릭 리스너
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
+                String mText_ceremony_type = arrayList_ceremony_detail.get(position).toString();
 
-                switch(mText_ceremony_detail)
+                switch(mText_ceremony_type)
                 {
                     case "애국가 제창":
                         showpopup_Anthem();
@@ -114,10 +88,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                     case "훈시":
                         showpopup_Speech();
                         break;
-                    case "+":
+                    case "커스텀":
                         showpopup_Edit();
                         break;
-
                 }
             }
 
@@ -231,38 +204,35 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void showpopup_Edit()
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
-                dialog.setContentView(R.layout.edit_dialog);
+                dialog.setContentView( R.layout.edit_dialog);
                 EditText tv1 = (EditText) dialog.findViewById(R.id.editText_custom_dialog_subtitle);
-                tv1.setText("에디트(EditText필)");
+                tv1.setText("훈시");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                final EditText tv2 = (EditText) dialog.findViewById(R.id.editText_custom_dialog);
-                tv2.setText("에디트1");
+                EditText tv2 = (EditText) dialog.findViewById(R.id.editText_custom_dialog);
+                tv2.setText("충성! 훈시!");
                 iv.setImageResource(R.drawable.korean_flag);
-                Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
+                Button btn1 = (Button) dialog.findViewById(R.id.button_edit_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        arrayList_ceremony_detail.add(tv2.getText().toString());
                         dialog.dismiss();
-
                     }
                 });
                 dialog.show();
             }
 
         });
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        switch (id)
-        {
-            case android.R.id.home:
-            {
+        Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
+        btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
+                startActivity(intent);
                 finish();
             }
-        }
-        return super.onOptionsItemSelected(item);
+        });
+
+
     }
 }

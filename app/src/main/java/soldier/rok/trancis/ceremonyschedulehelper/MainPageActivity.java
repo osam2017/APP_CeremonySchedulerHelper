@@ -132,8 +132,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
                 int responseCode;
 
-                con.setConnectTimeout(1000);
-                con.setReadTimeout(1000);
+                con.setConnectTimeout(1500);
+                con.setReadTimeout(1500);
 
                 responseCode = con.getResponseCode();
                 if (responseCode == 200) {
@@ -199,8 +199,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
                 int responseCode;
 
-                con.setConnectTimeout(1000);
-                con.setReadTimeout(1000);
+                con.setConnectTimeout(1500);
+                con.setReadTimeout(1500);
 
                 responseCode = con.getResponseCode();
                 if (responseCode == 200) {
