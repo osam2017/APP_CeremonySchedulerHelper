@@ -22,7 +22,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
-    String mText_ceremony_type;
+    String mText_ceremony_detail;
 
 
     @Override
@@ -72,27 +72,29 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             @Override
             //리스트뷰 아이템 클릭 리스너
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mText_ceremony_type = arrayList_ceremony_detail.get(position).toString();
-                Log.i(getClass().getName(),"식순명 추출");
-                Log.i(getClass().getName(),mText_ceremony_type);
-                popup_select();
-                Log.i(getClass().getName(),"식순명에 따른 팝업함수 호출");
+                mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
 
-            }
-
-            public void popup_select(){
-                switch (mText_ceremony_type){
-                    case "애국가 제창" : {
+                switch(mText_ceremony_detail)
+                {
+                    case "애국가 제창":
                         showpopup_Anthem();
-                    }
-                    case "상관에 대한 경례":{
-                    }
-                    case "":{
-                    }
-                    case "경례":{
-                    }
-                    case "경례":{
-                    }
+                        break;
+                    case "국기에 대한 맹세":
+                        showpopup_Oath();
+                        break;
+                    case "상관에 대한 경례":
+                        showpopup_Salute();
+                        break;
+                    case "신고":
+                        showpopup_Report();
+                        break;
+                    case "훈시":
+                        showpopup_Speech();
+                        break;
+                    case "+":
+                        showpopup_Edit();
+                        break;
+
                 }
             }
 
@@ -229,8 +231,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
