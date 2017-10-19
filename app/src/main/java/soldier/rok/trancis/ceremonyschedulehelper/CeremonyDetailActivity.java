@@ -31,6 +31,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_salute;
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar_menu_detailpage, menu);
@@ -40,6 +41,10 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     @Override public boolean onOptionsItemSelected(MenuItem item){
         //각각의 버튼을 클릭할때의 수행할것을 정의해 준다.
         switch (item.getItemId()){
+            case android.R.id.home: {
+                finish();
+                return true;
+            }
             case R.id.action_move_to_share_list:
                 Intent intent = new Intent(this, SharedListActivity.class);
                 intent.putExtra("ceremony name",getIntent().getExtras().getString("ceremony_name"));
@@ -49,7 +54,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("경고")
-                        .setMessage("삭제후 복구할수 없습니다.\n 정말로 삭제하시겠습니까?")
+                        .setMessage("삭제후 복구할수 없습니다.\n정말로 삭제하시겠습니까?")
                         .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -64,7 +69,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
                 break;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -82,6 +87,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
         final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
@@ -268,6 +274,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //식순추가용 detail내용 편집?
             }
         });
         Button btn_detail_page_order_delete = (Button) findViewById(R.id.btn_detail_page_order_delete);
