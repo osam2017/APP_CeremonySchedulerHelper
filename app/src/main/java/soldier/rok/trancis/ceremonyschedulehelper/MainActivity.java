@@ -25,16 +25,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         m_Ctxt = this;
 
+        auth.SetAuth(true);
+        auth.SetNick("test123312");
+
         EditText login_user_idText = (EditText)findViewById(R.id.login_user_idText);
         EditText login_user_passwordText = (EditText)findViewById(R.id.login_user_passwordText);
         Button btn_main_sign_up = (Button)findViewById(R.id.btn_main_sign_up);
 
-<<<<<<< HEAD
-       //FIXME-fordebug
-        /*auth.SetAuth(true);
-        auth.SetUserId(1);*/
-=======
->>>>>>> 04652ac522d3cfa704e2957f7429202e9a80d299
         btn_main_sign_up.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
