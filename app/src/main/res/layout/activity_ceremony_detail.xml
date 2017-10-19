@@ -25,12 +25,26 @@
         >
     </ListView>
 
-    <Button
-        android:id="@+id/btn_detail_confirm"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="돌아가기"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_detail_page_order_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="식순추가" />
+
+        <Button
+            android:id="@+id/btn_detail_page_order_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="식순삭제" />
+    </LinearLayout>
 
 
 </RelativeLayout>
