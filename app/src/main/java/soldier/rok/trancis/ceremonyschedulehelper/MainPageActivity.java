@@ -37,6 +37,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
     public static Context m_Ctxt;
     int iItemCnt = 0;
     int iFinishItemCnt = 0;
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedtime = 0;
     String testStr1, testStr2, testStr3;
 
     @Override
@@ -81,6 +83,16 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onBackPressed() {
+        long tempTIme = System.currentTimeMillis();
+        long intervalTime = tempTIme - backPressedtime;
+
+        if(0<= intervalTime && FINISH_INTERVAL_TIME >= intervalTime){
+            super.onBackPressed();
+        }
+        else{
+            backPressedtime = tempTIme;
+            Toast.makeText(getApplicationContext(),"'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

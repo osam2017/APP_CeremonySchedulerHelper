@@ -35,13 +35,15 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         String strDetail = getIntent().getExtras().getString("ceremony_detail");
         String strSort = getIntent().getExtras().getString("ceremony_sort");
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
+
 
         ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
         final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
