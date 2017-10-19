@@ -223,11 +223,16 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         });
 
-        Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
-        btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
+        Button btn_detail_page_order_add = (Button) findViewById(R.id.btn_detail_page_order_add);
+        btn_detail_page_order_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+            }
+        });
+        Button btn_detail_page_order_delete = (Button) findViewById(R.id.btn_detail_page_order_delete);
+        btn_detail_page_order_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
 

@@ -148,7 +148,7 @@
                 android:id="@+id/btn_rg_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Custom Event"
+                android:text="사용자 정의"
                 android:layout_weight="1" />
             <!--커스터마이징-->
 
