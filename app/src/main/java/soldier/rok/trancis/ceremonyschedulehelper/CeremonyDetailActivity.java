@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
+
+    ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
+    final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
+    ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
+
 
 
     @Override
@@ -39,18 +45,13 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
-        final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
-
-
-        ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
         if(strDetail.compareTo("*") == 0)
             strDetail = "";
 
         //divide detail by \n and add elements into arrayList_ceremony_detail
-        String[] strDiv = strDetail.split("\n");
+        final String[] strDiv = strDetail.split("\n");
         for(int i=0; i<strDiv.length; i++)
         {
             if(strDiv[i] != "")
@@ -62,6 +63,23 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         {
             arrayList_ceremony_detail.add("+");
         }
+
+        onResume();
+
+        Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
+        btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+    }
+
+    @Override public void onResume()
+    {
+        super.onResume();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -203,34 +221,27 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void showpopup_Edit()
             {
                 final Dialog dialog = new Dialog(CeremonyDetailActivity.this);
-                dialog.setContentView( R.layout.custom_dialog);
-                TextView tv1 = (TextView) dialog.findViewById(R.id.textView_custom_dialog_subtitle);
+                dialog.setContentView(R.layout.edit_dialog);
+                EditText tv1 = (EditText) dialog.findViewById(R.id.editText_custom_dialog_subtitle);
                 tv1.setText("에디트(EditText필)");
                 ImageView iv = (ImageView) dialog.findViewById(R.id.imageView_custom_dialog);
-                TextView tv2 = (TextView) dialog.findViewById(R.id.textView_custom_dialog);
+                final EditText tv2 = (EditText) dialog.findViewById(R.id.editText_custom_dialog);
                 tv2.setText("에디트1");
                 iv.setImageResource(R.drawable.korean_flag);
                 Button btn1 = (Button) dialog.findViewById(R.id.button_custom_dialog);
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        arrayList_ceremony_detail.add(tv2.getText().toString());
                         dialog.dismiss();
+
                     }
                 });
                 dialog.show();
             }
 
         });
-
-        Button btn_confirm_detail_page = (Button) findViewById(R.id.btn_detail_confirm);
-        btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-
     }
+
 
 }

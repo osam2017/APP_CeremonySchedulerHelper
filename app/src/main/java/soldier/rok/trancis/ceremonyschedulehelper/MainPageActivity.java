@@ -47,6 +47,11 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         //get schedules from server
         new GetEidByUid().execute();
 
+        ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+        listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_mainpage);
         toolbar.setTitle(auth.getNick()+"의 행사 내역");
@@ -73,8 +78,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         super.onResume();
 
 
-       final ListView listView = (ListView)findViewById(R.id.list_user_schedule);
-       final CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
+       ListView listView = (ListView)findViewById(R.id.list_user_schedule);
+       CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_list_row, listDataArray);
        listView.setAdapter(customAdapter);
        listView.setOnItemClickListener(this);
     }
@@ -157,7 +162,6 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 {
                     onResume();
                 }
-
             }
             catch(ParseException e)
             {

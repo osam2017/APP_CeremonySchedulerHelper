@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -24,12 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         m_Ctxt = this;
 
-
-        onResume();
-
         EditText login_user_idText = (EditText)findViewById(R.id.login_user_idText);
         EditText login_user_passwordText = (EditText)findViewById(R.id.login_user_passwordText);
         Button btn_main_sign_up = (Button)findViewById(R.id.btn_main_sign_up);
+
+
 
         btn_main_sign_up.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -58,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainPageActivity.class);
             startActivity(intent);
         }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Wrong Id or Password", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
