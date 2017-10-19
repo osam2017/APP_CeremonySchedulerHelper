@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +25,8 @@ public class CeremonyDetailActivity extends AppCompatActivity {
     private MediaPlayer mp_anthem;
     private MediaPlayer mp_oath;
     private MediaPlayer mp_salute;
+    String mText_ceremony_detail;
+
 
     ListView listView = (ListView)findViewById(R.id.list_order_ceremony);
     final ArrayList<String> arrayList_ceremony_detail = new ArrayList<String>();
@@ -39,11 +44,15 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
-        String strDetail = getIntent().getExtras().getString("ceremony_detail");
-        String strSort = getIntent().getExtras().getString("ceremony_sort");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        String strDetail = getIntent().getExtras().getString("ceremony_detail");
+        String strSort = getIntent().getExtras().getString("ceremony_sort");
+
 
         listView.setAdapter(simpleAdapter2);
 
@@ -86,7 +95,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             @Override
             //리스트뷰 아이템 클릭 리스너
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
+                mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
 
                 switch(mText_ceremony_detail)
                 {
@@ -108,6 +117,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                     case "+":
                         showpopup_Edit();
                         break;
+
                 }
             }
 
@@ -243,5 +253,16 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch (id)
+        {
+            case android.R.id.home:
+            {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
