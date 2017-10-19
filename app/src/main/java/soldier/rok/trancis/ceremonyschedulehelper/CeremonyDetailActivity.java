@@ -46,6 +46,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
     private int m_iEid;
     private String m_strName;
+    private String m_strDate;
+    private String m_strSort;
+    private String m_strDetail;
 
 
     @Override
@@ -90,8 +93,9 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar_ceremony_detail);
         toolbar.setTitle(getIntent().getExtras().getString("ceremony_name"));
-        String strDetail = getIntent().getExtras().getString("ceremony_detail");
-        String strSort = getIntent().getExtras().getString("ceremony_sort");
+        m_strDetail = getIntent().getExtras().getString("ceremony_detail");
+        m_strSort = getIntent().getExtras().getString("ceremony_sort");
+        m_strDate = getIntent().getExtras().getString("ceremony_date");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -102,11 +106,11 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         final ArrayAdapter<String> simpleAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList_ceremony_detail);
         listView.setAdapter(simpleAdapter2);
 
-        if(strDetail.compareTo("*") == 0)
-            strDetail = "";
+        if(m_strDetail.compareTo("*") == 0)
+            m_strDetail = "";
 
         //divide detail by \n and add elements into arrayList_ceremony_detail
-        String[] strDiv = strDetail.split("\n");
+        String[] strDiv = m_strDetail.split("\n");
         for(int i=0; i<strDiv.length; i++)
         {
             if(strDiv[i] != "")
@@ -333,6 +337,16 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_detail_page_order_save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                String strTemp = "";
+                for(int i=0; i<arrayList_ceremony_detail.size(); i++)
+                {
+                    if(i == 0)
+                        strTemp = arrayList_ceremony_detail.get(0);
+                    else
+                        strTemp = strTemp + "\n" + arrayList_ceremony_detail.get(i);
+                }
+                m_strDetail = strTemp;
+                new EditSchedule().execute();
                 // 서버저장 코드
             }
         });
@@ -411,6 +425,54 @@ public class CeremonyDetailActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             //go back page and reload schedules
+            Intent intent = new Intent(getApplicationContext(), MainPageActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    public class EditSchedule extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            try {
+                URL url = new URL(GLOBALVAR.SCHEDULE_URL);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                con.setRequestProperty("Context_Type", "application/x-www-form-urlencoded");
+                con.setRequestMethod("PUT");
+                con.setDoOutput(true);
+
+                OutputStream os = con.getOutputStream();
+                String strData = "eid=" + m_iEid + "&date=" + m_strDate + "&sort=" + "사용자 정의" + "&detail=" + m_strDetail;
+                os.write(strData.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+                if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                } else {
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        protected void onPostExecute(String result) {
+            //이전 화면의 데이터들을 최신화 해야한다.
+            //
             Intent intent = new Intent(getApplicationContext(), MainPageActivity.class);
             startActivity(intent);
             finish();

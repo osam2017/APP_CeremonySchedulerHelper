@@ -125,12 +125,14 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> Parent, View view, int position, long id){
         Intent intent_list_click = new Intent(getBaseContext(), CeremonyDetailActivity.class);
         intent_list_click.putExtra("ceremony_name", listDataArray.get(position).getText_ceremony_name());
         intent_list_click.putExtra("ceremony_detail", listDataArray.get(position).getText_ceremony_detail());
         intent_list_click.putExtra("ceremony_sort", listDataArray.get(position).getText_ceremony_sort());
+        intent_list_click.putExtra("ceremony_date", listDataArray.get(position).getText_ceremony_date());
         intent_list_click.putExtra("eid", listDataArray.get(position).getEID());
 
         startActivity(intent_list_click);

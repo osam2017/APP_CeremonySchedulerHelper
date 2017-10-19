@@ -63,7 +63,7 @@ public class ListData {
                 this.text_ceremony_detail = "애국가 제창"+"\n"
                         +"국기에 대한 맹세";
                 break;
-            case "커스텀":
+            case "사용자 정의":
                 this.text_ceremony_detail = text_ceremony_detail;
         }
 
