@@ -240,7 +240,7 @@ public class CeremonyAddActivity extends AppCompatActivity {
                 con.setDoOutput(true);
 
                 OutputStream os = con.getOutputStream();
-                String strData = "date=" + m_strDate + "&title=" + m_strTitle + "&sort=" + m_strSort +"&uid=" + m_iUid;
+                String strData = "date=" + m_strDate + "&title=" + m_strTitle + "&sort=" + m_strSort +"&uid=" + m_iUid +"&detail=*";
                 os.write(strData.getBytes("UTF-8"));
                 os.flush();
                 os.close();
@@ -278,17 +278,6 @@ public class CeremonyAddActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result) {
-
-            String strEx = "*";
-            JSONParser jsonParser = new JSONParser();
-            org.json.simple.JSONObject jsonObj = null;
-            try {
-                jsonObj = (org.json.simple.JSONObject) jsonParser.parse(result);
-                strEx = jsonObj.get("title").toString();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
             Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
             startActivity(intent);
         }

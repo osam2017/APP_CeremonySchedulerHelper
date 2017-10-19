@@ -147,7 +147,8 @@ public class MainPageActivity extends AppCompatActivity implements AdapterView.O
                 String strTitle = jsonObj.get("title").toString();
                 String strDate = jsonObj.get("date").toString();
                 String strSort = jsonObj.get("sort").toString();
-                listDataArray.add(0, new ListData(strDate, strTitle, strSort, strSort));
+                String strDetail = jsonObj.get("detail").toString();
+                listDataArray.add(0, new ListData(strDate, strTitle, strSort, strDetail));
                 iFinishItemCnt++;
                 //when get all of the item
                 if(iItemCnt == iFinishItemCnt)
