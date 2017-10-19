@@ -71,15 +71,15 @@ public class SharedListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(SharedListActivity.this);
-                dialog.setContentView(R.layout.custom_dialog);
-                EditText et = (EditText)findViewById(R.id.editText_custom_dialog_add_shared_nickname);
-                Button btn1 = (Button)findViewById(R.id.btn_custom_dialog_add_shared_confirm);
-                Button btn2 = (Button)findViewById(R.id.btn_custom_dialog_add_shared_cancel);
+                dialog.setContentView(R.layout.custom_dialog_add_shared);
+                EditText et = (EditText) dialog.findViewById(R.id.editText_custom_dialog_add_shared_nickname);
+                Button btn1 = (Button) dialog.findViewById(R.id.btn_custom_dialog_add_shared_confirm);
+                Button btn2 = (Button) dialog.findViewById(R.id.btn_custom_dialog_add_shared_cancel);
 
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
+                  //공유 인원 추가 코드 넣을것
                     }
                 });
                 btn2.setOnClickListener(new View.OnClickListener() {
