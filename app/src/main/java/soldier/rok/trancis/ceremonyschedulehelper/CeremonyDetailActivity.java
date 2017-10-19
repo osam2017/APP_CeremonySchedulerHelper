@@ -70,25 +70,27 @@ public class CeremonyDetailActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String mText_ceremony_detail = arrayList_ceremony_detail.get(position).toString();
 
-                if(mText_ceremony_detail == "애국가 제창"){
-                    showpopup_Anthem();
+                switch(mText_ceremony_detail)
+                {
+                    case "애국가 제창":
+                        showpopup_Anthem();
+                        break;
+                    case "국기에 대한 맹세":
+                        showpopup_Oath();
+                        break;
+                    case "상관에 대한 경례":
+                        showpopup_Salute();
+                        break;
+                    case "신고":
+                        showpopup_Report();
+                        break;
+                    case "훈시":
+                        showpopup_Speech();
+                        break;
+                    case "+":
+                        showpopup_Edit();
+                        break;
                 }
-                else if(mText_ceremony_detail == "국기에 대한 맹세"){
-                    showpopup_Oath();
-                }
-                else if(mText_ceremony_detail == "상관에 대한 경례"){
-                    showpopup_Salute();
-                }
-                else if(mText_ceremony_detail == "신고"){
-                    showpopup_Report();
-                }
-                else if(mText_ceremony_detail == "훈시"){
-                    showpopup_Speech();
-                }
-                else if(mText_ceremony_detail == "+"){
-                    showpopup_Edit();
-                }
-
             }
 
             public void showpopup_Anthem()
@@ -224,8 +226,6 @@ public class CeremonyDetailActivity extends AppCompatActivity {
         btn_confirm_detail_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MainPageActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
