@@ -289,9 +289,10 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(et.getText().toString().compareTo("") == 0)
+                            return;
                         arrayList_ceremony_detail.add(et.getText().toString());
                         simpleAdapter2.notifyDataSetChanged();
-                        //서버 전송필요
                         dialog.dismiss();
                     }
                 });
@@ -314,7 +315,7 @@ public class CeremonyDetailActivity extends AppCompatActivity {
                        .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                              arrayList_ceremony_detail.remove();
+                               arrayList_ceremony_detail.remove(arrayList_ceremony_detail.size()-1);
                                simpleAdapter2.notifyDataSetChanged();
                            }
                        })

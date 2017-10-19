@@ -1,6 +1,7 @@
 package soldier.rok.trancis.ceremonyschedulehelper;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import org.json.simple.JSONObject;
